@@ -9,7 +9,7 @@ To run project with yarn:
 
 ## Recent Screenshots
 
-![Imgur](https://i.imgur.com/EWW9zEt.gif)
+![Imgur](https://imgur.com/isYByiJ.gif)
 --------------------
 
 
