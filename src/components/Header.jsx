@@ -23,12 +23,14 @@ class Header extends Component {
         <img alt="logo" src={DMM_header} height="60em" width="280em"/>
       </div>
     );
+    const { showMenu } = this.props.sidebar;
     return (
       <div>
         <AppBar
           title={logo}
           onLeftIconButtonTouchTap={this.onMenuClick.bind(this)}
           secondary={true}
+          showMenuIconButton={showMenu}
         />
         <Drawer
           docked={this.props.sidebar.docked}

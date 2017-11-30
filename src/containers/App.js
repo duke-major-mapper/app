@@ -1,6 +1,6 @@
 // Packages
 import React, { Component } from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
@@ -8,17 +8,32 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 import thunkMiddleware from 'redux-thunk';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { ConnectedRouter, routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 
 // Components and Containers
 import Header from './../components/Header';
 import Home from './Home';
+import ConnectedSwitch from './../components/utils/switch';
 
-import reducers from "./../reducers";
+import { Login } from './../components';
+
+
+import * as allReducers from "./../reducers";
 
 // Styling
 import logo from './../images/react_logo.svg';
 import theme from '../global/material-ui-theme';
 import './../styles/index.css';
+
+const reducers = combineReducers({
+  ...allReducers,
+  router: routerReducer,
+});
+
+const history = createHistory();
+const middleware = routerMiddleware(history);
 
 injectTapEventPlugin();
 
@@ -33,7 +48,7 @@ const DevTools = createDevTools(
 );
 
 const enhancer = compose(
-  applyMiddleware(thunkMiddleware),
+  applyMiddleware(middleware, thunkMiddleware),
   DevTools.instrument(),
 );
 
@@ -44,11 +59,19 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div>
-          <MuiThemeProvider muiTheme={theme}>
-            <Header />
-            <Home />
-          </MuiThemeProvider>
-          { <DevTools /> }
+          <div>
+            <ConnectedRouter history={history}>
+              <MuiThemeProvider muiTheme={theme}>
+                <Header />
+                <ConnectedSwitch>
+                  <Route path='/' exact component={Login} />
+                  <Route path='/login' exact component={Login} />
+                  <Route path='/home' exact component={Home} />
+                </ConnectedSwitch>
+              </MuiThemeProvider>
+            </ConnectedRouter>
+          </div>
+          <DevTools />
         </div>
       </Provider>
     );

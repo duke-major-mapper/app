@@ -1,7 +1,8 @@
 const defaultState = {
-  docked: true,
+  docked: false,
   submitted: false,
   overlapSubmitted: false,
+  showMenu: false,
   major1: '',
   major2: ''
 }
@@ -26,6 +27,23 @@ export default (state=defaultState, action) => {
     }
     case "OVERLAP_PRESS": {
       state = {...state, overlapSubmitted: true}
+      break;
+    }
+    case '@@router/LOCATION_CHANGE': {
+      const pathname = action.payload.pathname;
+      if (pathname.includes('/login')) {
+        state = {
+          ...state,
+          showMenu: false,
+          docked: false,
+        };
+      } else {
+        state = {
+          ...state,
+          showMenu: true,
+          docked: true,
+        };
+      }
       break;
     }
   }
