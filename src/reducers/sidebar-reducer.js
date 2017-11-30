@@ -31,7 +31,7 @@ export default (state=defaultState, action) => {
     }
     case '@@router/LOCATION_CHANGE': {
       const pathname = action.payload.pathname;
-      if (pathname.includes('/login')) {
+      if (!pathname.includes('/home')) {
         state = {
           ...state,
           showMenu: false,

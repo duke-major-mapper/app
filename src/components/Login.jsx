@@ -5,6 +5,7 @@ export default class Login extends Component {
     render() {
       return (
         <div>
+          Login Page: <br />
           <Link to='/home'>
             test
           </Link>
