@@ -5,15 +5,15 @@ Please use `yarn` to run scripts rather than `npm`, `yarn` is faster and more ef
 Steps:
 1. Make sure yarn is installed globally (`npm install -g yarn`)
 2. While in the root directory install all dependencies (`yarn install`)
-3. The following depends on a local or production environments: 
+3. The following depends on a local or production environments:
 
    3a. If running locally, run the cloud_sql_proxy in the `backend` directory.
    - Make sure you have the cloud_sql_proxy installed appropriatly and that you have the proxy_keys.json file in the `backend` directory (This is important! Please do not put the file in the root directory). Refer to Aman for further detail.
    - Use following command to run proxy: `./cloud_sql_proxy -instances="duke-major-planner:us-east1:dmp-mysql-instance"=tcp:3306 -credential_file="proxy_keys.json" &`
-   
+
    3b. If preparing for production, run `yarn build`... [More info to be added]
 
-4. Run `yarn run dev` to run frontend and api at once. 
+4. Run `yarn start` to run frontend and api at once. 
 
 
 ## Recent Screenshots
