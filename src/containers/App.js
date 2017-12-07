@@ -16,7 +16,7 @@ import createHistory from 'history/createBrowserHistory';
 import Header from './../components/Header';
 import Home from './Home';
 import ConnectedSwitch from './../components/utils/switch';
-
+import SignUp from './../components/SignUp';
 import { Login } from './../components';
 
 
@@ -65,6 +65,7 @@ class App extends Component {
                 <Header />
                 <ConnectedSwitch>
                   <Route path='/' exact component={Login} />
+                  <Route path='/test' exact component={SignUp} />
                   <Route path='/login' exact component={Login} />
                   <Route path='/home' exact component={Home} />
                 </ConnectedSwitch>

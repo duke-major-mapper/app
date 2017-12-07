@@ -1,0 +1,18 @@
+.signup {
+  padding: 192px;
+  text-align: center;
+}
+
+.stepper {
+  width: 100%;
+  max-width: 700;
+  margin: auto;
+}
+
+.first-step {
+  display: inline-block;
+}
+
+.third-step {
+  color: #0d47a1;
+}
