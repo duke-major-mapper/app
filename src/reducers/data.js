@@ -6,6 +6,7 @@ const initialState = {
   overlap: [],
   error: false,
   errorMessage: null,
+  AllClasses: [],
 };
 
 function data(state = initialState, action) {
@@ -29,6 +30,29 @@ function data(state = initialState, action) {
       return {
         ...state,
         majors: action.payload.data.data,
+        isLoading: false,
+        error: false,
+      }
+    }
+    case 'BEGIN_GET_ALL_CLASSES': {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        errorMessage: null,
+      };
+    }
+    case 'FAILED_GET_ALL_CLASSES': {
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.message,
+      }
+    }
+    case 'END_GET_ALL_CLASSES': {
+      return {
+        ...state,
+        AllClasses: action.payload.data.data,
         isLoading: false,
         error: false,
       }

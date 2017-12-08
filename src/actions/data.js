@@ -1,6 +1,6 @@
 import crud from './helpers/crud';
 
-const url = "http://localhost:8080"
+const url = ""
 
 const getAllMajors = () => (
   crud({
@@ -10,9 +10,21 @@ const getAllMajors = () => (
       end: 'END_GET_MAJORS',
     },
     method: 'GET',
-    url: url + '/majors'
+    url: '/majors'
   })
 );
+
+const getAllClasses = () => (
+  crud({
+    dispatch: {
+      begin: 'BEGIN_GET_ALL_CLASSES',
+      fail: 'FAILED_GET_ALL_CLASSES',
+      end: 'END_GET_ALL_CLASSES',
+    },
+    method: 'GET',
+    url: '/classes'
+  })
+)
 
 const getClasses = (id) => (
   crud({
@@ -22,7 +34,7 @@ const getClasses = (id) => (
       end: 'END_GET_CLASSES',
     },
     method: 'GET',
-    url: url + '/classes/' + id
+    url: '/classes/' + id
   })
 )
 
@@ -34,12 +46,13 @@ const getOverlap = (id1, id2) => (
       end: 'END_GET_OVERLAP',
     },
     method: 'GET',
-    url: url + '/overlap?ids=' + id1 + ',' + id2
+    url: '/overlap?ids=' + id1 + ',' + id2
   })
 )
 
 export {
   getAllMajors,
+  getAllClasses,
   getClasses,
   getOverlap,
 };

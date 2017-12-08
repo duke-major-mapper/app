@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -6,6 +8,9 @@ import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import FirstPage from './FirstPage';
 import ThirdPage from './ThirdPage';
+import ClassTable from './ClassTable';
+
+import { getAllClasses } from './../../actions/data';
 
 class SignUp extends Component {
     constructor(props) {
@@ -13,6 +18,10 @@ class SignUp extends Component {
       this.state = {
         stepIndex: 0,
       };
+    }
+
+    componentWillMount() {
+      this.props.getAllClasses();
     }
 
     createStepper = () => {
@@ -38,13 +47,13 @@ class SignUp extends Component {
       const { stepIndex } = this.state;
       switch (stepIndex) {
         case 0: {
-          return ( <FirstPage /> );
+          return <FirstPage />;
         }
         case 1: {
-          return null;
+          return <ClassTable />;
         }
         case 2: {
-          return <ThirdPage />
+          return <ThirdPage />;
         }
       }
     }
@@ -90,4 +99,19 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+  return {
+    data: state.data,
+    AllClasses: state.data.AllClasses,
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      getAllClasses: getAllClasses,
+    },
+    dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

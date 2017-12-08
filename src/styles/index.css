@@ -13,3 +13,5 @@ body {
 @import url('./Home.css');
 @import url('./Sidebar.css');
 @import url('./SignUp.css');
+
+@import url('https://npmcdn.com/react-bootstrap-table/dist/react-bootstrap-table-all.min.css');

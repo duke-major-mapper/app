@@ -27,6 +27,7 @@ if (config['INSTANCE_CONNECTION_NAME'] && config['NODE_ENV'] === 'production') {
 
 connection.query('USE major_data;');
 
+// GET all majors
 app.get('/majors', function (req, res) {
   var requestObject = requestTemplate;
     connection.query(
@@ -52,6 +53,31 @@ app.get('/majors', function (req, res) {
     console.log('GET ' + req.originalUrl);
 });
 
+// GET all classes
+app.get('/classes', function (req, res) {
+  console.log('test');
+    var requestObject = requestTemplate;
+    connection.query(
+        `SELECT class_code, name FROM Class`, function (error, result) {
+              if (error) {
+                requestObject.status = 500;
+                requestObject.success = false;
+                requestObject.message = (error.sqlMessage ? error.sqlMessage : error);
+                res.status(500).send(requestObject);
+              } else {
+                requestObject.status = 200;
+                requestObject.data = result;
+                requestObject.message = 'Classes recieved';
+                res.status(200).send(requestObject);
+              }
+            }
+
+    );
+    // may need to json.parse(data)
+    console.log('GET ' + req.originalUrl);
+});
+
+// GET all classes for a single major
 app.get('/classes/:id', function (req, res) {
     const major_id = req.params.id;
     if (!major_id) {
@@ -83,6 +109,7 @@ app.get('/classes/:id', function (req, res) {
     console.log('GET ' + req.originalUrl);
 });
 
+// GET all requirements for a single major
 app.get('/requirements/:id', function (req, res) {
   const major_id = req.params.id;
   if (!major_id) {
@@ -110,6 +137,7 @@ app.get('/requirements/:id', function (req, res) {
   console.log('GET ' + req.originalUrl);
 });
 
+// GET all overlapping classes between two majors
 app.get('/overlap', function (req, res) {
     let ids = req.query['ids'];
     if (!ids) {
