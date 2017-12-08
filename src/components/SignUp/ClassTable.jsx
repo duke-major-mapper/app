@@ -20,7 +20,38 @@ class ClassTable extends Component {
     this.state = {
       page: 1,
       total: Math.ceil(AllClasses.length/10),
+      selectedClasses: [],
     };
+  }
+
+  handleRowSelect = (rows) => {
+    if (rows.length === 0) return;
+    const { AllClasses } = this.props;
+    let { page, total, selectedClasses } = this.state;
+    let classes;
+    const startIndex = ((page - 1) * 10);
+    const endIndex = startIndex + 9;
+    if (rows === 'all') {
+      classes = AllClasses;
+    } else if (rows === 'none') {
+      this.state.selectedClasses = [];
+      return;
+    } else {
+      classes = rows.map((row) => (AllClasses[row + ((page - 1) * 10)]));
+      for (let i = startIndex; i < endIndex; i++) {
+        const classObject = AllClasses[i];
+        if (rows.indexOf(i) === -1 && selectedClasses.indexOf(classObject) !== -1) {
+          const index = selectedClasses.indexOf(classObject);
+          delete selectedClasses[index];
+        }
+      }
+    }
+
+    if(classes.length !== 0) {
+      selectedClasses = selectedClasses.concat(classes);
+      selectedClasses = selectedClasses.filter((val, i) => (selectedClasses.indexOf(val) == i))
+      this.state.selectedClasses = selectedClasses;
+    }
   }
 
   handlePaginationChange = (newPage) => {
@@ -32,14 +63,21 @@ class ClassTable extends Component {
   renderTable = () => {
     return (
       <div>
-        <Table>
+        <Table
+          multiSelectable
+          enableSelectAll
+          onRowSelection={this.handleRowSelect}
+        >
           <TableHeader>
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>Class Code</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody
+            stripedRows
+            showRowHover
+          >
             { this.getRows() }
           </TableBody>
         </Table>
