@@ -105,12 +105,14 @@ class ClassTable extends Component {
     return (
       <div>
         { this.renderTable() }
+        <div style={{ padding: '12px' }} >
           <Pagination
             total={this.state.total}
             display={10}
             current={this.state.page}
             onChange={this.handlePaginationChange.bind(this)}
           />
+        </div>
       </div>
     );
   }
