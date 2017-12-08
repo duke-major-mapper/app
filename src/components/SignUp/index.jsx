@@ -7,8 +7,8 @@ import FlatButton from 'material-ui/FlatButton';
 import { Step, Stepper, StepLabel } from 'material-ui/Stepper';
 
 import FirstPage from './FirstPage';
+import SecondPage from './SecondPage';
 import ThirdPage from './ThirdPage';
-import ClassTable from './ClassTable';
 
 import { getAllClasses } from './../../actions/data';
 
@@ -33,7 +33,7 @@ class SignUp extends Component {
               <StepLabel>Personal Information</StepLabel>
             </Step>
             <Step>
-              <StepLabel>Choose Classes</StepLabel>
+              <StepLabel>Choose Classes (Optional)</StepLabel>
             </Step>
             <Step>
               <StepLabel>Welcome to DMM!</StepLabel>
@@ -50,7 +50,7 @@ class SignUp extends Component {
           return <FirstPage />;
         }
         case 1: {
-          return <ClassTable />;
+          return <SecondPage />;
         }
         case 2: {
           return <ThirdPage />;
@@ -60,6 +60,10 @@ class SignUp extends Component {
 
     handleNextStep = () => {
       const { stepIndex } = this.state;
+      if (stepIndex == 2) {
+        const { history } = this.props;
+        history.push('/home');
+      }
       this.setState({
         stepIndex: stepIndex + 1,
       })
@@ -88,7 +92,7 @@ class SignUp extends Component {
                 onClick={ this.handlePrevStep }
               />
               <RaisedButton
-                label={ stepIndex === 3 ? 'Finish' : 'Next' }
+                label={ stepIndex === 2 ? 'Home Page' : 'Next' }
                 onClick={ this.handleNextStep }
                 primary={true}
               />
