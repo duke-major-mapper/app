@@ -78,6 +78,8 @@ class SignUp extends Component {
 
     render() {
       const { stepIndex } = this.state;
+      const { name, netID, password } = this.props.signup;
+      console.log(name);
       return (
         <div className='signup'>
           <Card>
@@ -93,6 +95,7 @@ class SignUp extends Component {
               />
               <RaisedButton
                 label={ stepIndex === 2 ? 'Home Page' : 'Next' }
+                disabled={ name === '' || netID === '' || password.length < 4}
                 onClick={ this.handleNextStep }
                 primary={true}
               />
@@ -107,6 +110,7 @@ const mapStateToProps = (state) => {
   return {
     data: state.data,
     AllClasses: state.data.AllClasses,
+    signup: state.signup,
   }
 };
 
