@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
 
-import { changeName, changeNetID, changePassword, changeError } from './../../actions/signup';
+import { changeName, changeNetID, changePassword, changeError, triggerSignUp } from './../../actions/signup';
 
 class FirstPage extends Component {
   constructor(props) {
@@ -33,16 +34,24 @@ class FirstPage extends Component {
         }
         break;
       }
-    }  
+    }
     if (newValue.trim() === '') {
       changeError('Please make sure all fields are filled')
     }
   }
 
   render() {
+    const { triggerSignUp } = this.props;
     const { errorMessage } = this.props.signup;
     return (
       <div className='first-step'>
+        <IconButton
+          tooltip="Return to Sign-In"
+          iconClassName="material-icons"
+          onClick={triggerSignUp}
+        >
+          keyboard_backspace
+        </IconButton>
         <h4> Personal Information: </h4>
         <TextField
           id="name"
@@ -91,6 +100,7 @@ const mapDispatchToProps = (dispatch) => {
       changeNetID: changeNetID,
       changePassword: changePassword,
       changeError: changeError,
+      triggerSignUp: triggerSignUp,
     },
     dispatch);
 };

@@ -65,7 +65,6 @@ class App extends Component {
                 <Header />
                 <ConnectedSwitch>
                   <Route path='/' exact component={Login} />
-                  <Route path='/test' exact component={SignUp} />
                   <Route path='/login' exact component={Login} />
                   <Route path='/home' exact component={Home} />
                 </ConnectedSwitch>

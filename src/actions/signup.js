@@ -1,3 +1,9 @@
+export const triggerSignUp = () => {
+  return {
+    type: 'SIGN_UP_TRIGGER'
+  }
+}
+
 export const changeName = (newValue) => {
   return {
     type: 'CHANGE_NAME',

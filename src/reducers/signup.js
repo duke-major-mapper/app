@@ -3,10 +3,17 @@ const initialState = {
   netID: '',
   password: '',
   errorMessage: '',
+  signup: false,
 };
 
 export default (state = initialState, action) => {
   switch(action.type) {
+    case 'SIGN_UP_TRIGGER': {
+      return {
+        ...state,
+        signup: !state.signup,
+      }
+    }
     case 'CHANGE_NAME': {
       return {
         ...state,
