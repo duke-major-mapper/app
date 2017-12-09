@@ -103,6 +103,7 @@ class ClassTable extends Component {
             floatingLabelFixed
             hintText="Search by Class Name"
             fullWidth={true}
+            onChange={this.search}
           />
         </div>
         <div className='search-icon'>
@@ -116,6 +117,20 @@ class ClassTable extends Component {
         <br />
       </div>
     );
+  }
+
+  search = (event, searchString) => {
+    const { AllClasses } = this.props;
+    searchString = searchString.trim().toLowerCase();
+    const searchedData = [];
+    for (let i = 0; i < AllClasses.length; i++) {
+      const Class = AllClasses[i]; // variable is capitalized because 'class' is already used by JS
+      const name = Class.name.toLowerCase();
+      if (name.indexOf(searchString) !== -1) {
+        searchedData.push(Class);
+      }
+    }
+    this.setState({ searchedData });
   }
 
   getRows = () => {
