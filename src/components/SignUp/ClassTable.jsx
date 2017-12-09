@@ -9,6 +9,8 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
 import Pagination from 'material-ui-pagination';
 
 import { getAllClasses } from './../../actions/data';
@@ -21,6 +23,7 @@ class ClassTable extends Component {
       page: 1,
       total: Math.ceil(AllClasses.length/10),
       selectedClasses: [],
+      searchedData: AllClasses,
     };
   }
 
@@ -72,7 +75,9 @@ class ClassTable extends Component {
           enableSelectAll
           onRowSelection={this.handleRowSelect}
         >
-          <TableHeader>
+          <TableHeader
+            displaySelectAll={false}
+          >
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>Class Code</TableHeaderColumn>
@@ -111,6 +116,11 @@ class ClassTable extends Component {
     const { AllClasses } = this.props;
     return (
       <div>
+        <IconButton
+            iconClassName="material-icons"
+          >
+            search
+          </IconButton>
         { this.renderTable() }
         <div style={{ padding: '12px' }} >
           <Pagination
