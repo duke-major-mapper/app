@@ -28,20 +28,19 @@ class ClassTable extends Component {
   }
 
   handleRowSelect = (rows) => {
-    if (rows.length === 0) return;
     const { AllClasses } = this.props;
-    let { page, total, selectedClasses } = this.state;
+    let { page, total, selectedClasses, searchedData } = this.state;
     let selected = [];
     let deselected = [];
     const startIndex = ((page - 1) * 10);
     const endIndex = startIndex + 9;
     // Creating arrays for selected and deselected classes of each page
     rows.forEach((val) => {
-      selected.push(AllClasses[val + startIndex]);
+      selected.push(searchedData[val + startIndex]);
     });
     for (let i = startIndex; i < endIndex; i++) {
-      if (selected.indexOf(AllClasses[i]) === -1) {
-        deselected.push(AllClasses[i]);
+      if (selected.indexOf(searchedData[i]) === -1) {
+        deselected.push(searchedData[i]);
       }
     }
     // Will change selectedClasses state value depending on selected and deselected
@@ -86,6 +85,7 @@ class ClassTable extends Component {
           <TableBody
             stripedRows
             showRowHover
+            deselectOnClickaway={false}
           >
             { this.getRows() }
           </TableBody>
@@ -130,19 +130,22 @@ class ClassTable extends Component {
         searchedData.push(Class);
       }
     }
-    this.setState({ searchedData });
+    this.setState({
+      searchedData,
+      total: Math.ceil(searchedData.length/10)
+    });
   }
 
   getRows = () => {
     const { AllClasses } = this.props;
-    const { page, selectedClasses } = this.state;
+    const { page, selectedClasses, searchedData } = this.state;
     const startIndex = ( page - 1) * 10;
     const endIndex = startIndex + 9;
-    return AllClasses.slice(startIndex, endIndex).map((value, index) => {
+    return searchedData.slice(startIndex, endIndex).map((value, index) => {
       return (
         <TableRow
           key={index}
-          selected={selectedClasses.indexOf(AllClasses[index + startIndex]) !== -1}
+          selected={selectedClasses.indexOf(searchedData[index + startIndex]) !== -1}
         >
           <TableRowColumn>{value.name}</TableRowColumn>
           <TableRowColumn>{value.class_code}</TableRowColumn>
