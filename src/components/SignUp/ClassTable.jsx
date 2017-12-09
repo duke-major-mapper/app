@@ -28,30 +28,34 @@ class ClassTable extends Component {
     if (rows.length === 0) return;
     const { AllClasses } = this.props;
     let { page, total, selectedClasses } = this.state;
-    let classes;
+    let selected = [];
+    let deselected = [];
     const startIndex = ((page - 1) * 10);
     const endIndex = startIndex + 9;
-    if (rows === 'all') {
-      classes = AllClasses;
-    } else if (rows === 'none') {
-      this.state.selectedClasses = [];
-      return;
-    } else {
-      classes = rows.map((row) => (AllClasses[row + ((page - 1) * 10)]));
-      for (let i = startIndex; i < endIndex; i++) {
-        const classObject = AllClasses[i];
-        if (rows.indexOf(i) === -1 && selectedClasses.indexOf(classObject) !== -1) {
-          const index = selectedClasses.indexOf(classObject);
-          delete selectedClasses[index];
-        }
+    // Creating arrays for selected and deselected classes of each page
+    rows.forEach((val) => {
+      selected.push(AllClasses[val + startIndex]);
+    });
+    for (let i = startIndex; i < endIndex; i++) {
+      if (selected.indexOf(AllClasses[i]) === -1) {
+        deselected.push(AllClasses[i]);
       }
     }
-
-    if(classes.length !== 0) {
-      selectedClasses = selectedClasses.concat(classes);
-      selectedClasses = selectedClasses.filter((val, i) => (selectedClasses.indexOf(val) == i))
-      this.state.selectedClasses = selectedClasses;
+    // Will change selectedClasses state value depending on selected and deselected
+    for (let i = 0; i < selected.length; i++) {
+      if (selectedClasses.indexOf(selected[i]) === -1) {
+        selectedClasses.push(selected[i]);
+        this.setState({ selectedClasses });
+      }
     }
+    for (let i = 0; i < deselected.length; i++) {
+      const index = selectedClasses.indexOf(deselected[i]);
+      if (index !== -1) {
+        selectedClasses.splice(index, 1);
+        this.setState({ selectedClasses });
+      }
+    }
+    console.log(this.state.selectedClasses);
   }
 
   handlePaginationChange = (newPage) => {
@@ -87,12 +91,15 @@ class ClassTable extends Component {
 
   getRows = () => {
     const { AllClasses } = this.props;
-    const { page } = this.state;
+    const { page, selectedClasses } = this.state;
     const startIndex = ( page - 1) * 10;
     const endIndex = startIndex + 9;
     return AllClasses.slice(startIndex, endIndex).map((value, index) => {
       return (
-        <TableRow key={index}>
+        <TableRow
+          key={index}
+          selected={selectedClasses.indexOf(AllClasses[index + startIndex]) !== -1}
+        >
           <TableRowColumn>{value.name}</TableRowColumn>
           <TableRowColumn>{value.class_code}</TableRowColumn>
         </TableRow>
