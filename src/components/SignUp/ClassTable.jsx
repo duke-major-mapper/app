@@ -132,7 +132,8 @@ class ClassTable extends Component {
     }
     this.setState({
       searchedData,
-      total: Math.ceil(searchedData.length/10)
+      total: Math.ceil(searchedData.length/10),
+      page: 1,
     });
   }
 

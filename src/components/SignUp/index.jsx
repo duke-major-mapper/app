@@ -94,7 +94,7 @@ class SignUp extends Component {
               />
               <RaisedButton
                 label={ stepIndex === 2 ? 'Home Page' : 'Next' }
-                // disabled={ name === '' || netID === '' || password.length < 4}
+                disabled={ name === '' || netID === '' || password.length < 4}
                 onClick={ this.handleNextStep }
                 primary={true}
               />
