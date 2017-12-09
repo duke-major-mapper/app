@@ -47,7 +47,7 @@ class Login extends Component {
               </div>
             </Card>
             :
-            <SignUp />
+            <SignUp history={this.props.history} />
           }
         </div>
       );

@@ -8,6 +8,7 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 import thunkMiddleware from 'redux-thunk';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Redirect } from 'react-router';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { ConnectedRouter, routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
@@ -64,9 +65,9 @@ class App extends Component {
               <MuiThemeProvider muiTheme={theme}>
                 <Header />
                 <ConnectedSwitch>
-                  <Route path='/' exact component={Login} />
                   <Route path='/login' exact component={Login} />
                   <Route path='/home' exact component={Home} />
+                  <Redirect from='*' to='/login' />
                 </ConnectedSwitch>
               </MuiThemeProvider>
             </ConnectedRouter>

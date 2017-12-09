@@ -11,6 +11,7 @@ import SecondPage from './SecondPage';
 import ThirdPage from './ThirdPage';
 
 import { getAllClasses } from './../../actions/data';
+import { triggerSignUp } from '../../actions/signup';
 
 class SignUp extends Component {
     constructor(props) {
@@ -71,6 +72,8 @@ class SignUp extends Component {
 
     handlePrevStep = () => {
       const { stepIndex } = this.state;
+      const { triggerSignUp } = this.props;
+      if (stepIndex === 0) triggerSignUp();
       this.setState({
         stepIndex: stepIndex - 1,
       })
@@ -89,7 +92,6 @@ class SignUp extends Component {
             <CardActions>
               <FlatButton
                 label='Back'
-                disabled={ stepIndex === 0 }
                 onClick={ this.handlePrevStep }
               />
               <RaisedButton
@@ -117,6 +119,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getAllClasses: getAllClasses,
+      triggerSignUp: triggerSignUp,
     },
     dispatch);
 };
