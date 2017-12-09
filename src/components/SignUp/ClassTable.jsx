@@ -94,6 +94,30 @@ class ClassTable extends Component {
     );
   }
 
+  renderSearchBar = () => {
+    return (
+      <div className='search'>
+        <div className='search-text'>
+          <TextField
+            floatingLabelText="Search"
+            floatingLabelFixed
+            hintText="Search by Class Name"
+            fullWidth={true}
+          />
+        </div>
+        <div className='search-icon'>
+          <IconButton
+            iconClassName="material-icons"
+          >
+            search
+          </IconButton>
+        </div>
+        <br />
+        <br />
+      </div>
+    );
+  }
+
   getRows = () => {
     const { AllClasses } = this.props;
     const { page, selectedClasses } = this.state;
@@ -116,11 +140,7 @@ class ClassTable extends Component {
     const { AllClasses } = this.props;
     return (
       <div>
-        <IconButton
-            iconClassName="material-icons"
-          >
-            search
-          </IconButton>
+        {this.renderSearchBar()}
         { this.renderTable() }
         <div style={{ padding: '12px' }} >
           <Pagination

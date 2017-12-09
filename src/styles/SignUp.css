@@ -16,3 +16,18 @@
 .third-step {
   color: #0d47a1;
 }
+
+.search {
+  text-align: left;
+}
+
+.search-text {
+  width: 95%;
+  display: inline-block;
+}
+
+.search-icon {
+  float: right;
+  display: inline-block;
+  padding-top: 1.5em;
+}
