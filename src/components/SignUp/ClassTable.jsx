@@ -14,6 +14,7 @@ import IconButton from 'material-ui/IconButton';
 import Pagination from 'material-ui-pagination';
 
 import { getAllClasses } from './../../actions/data';
+import { changeTakenClasses } from './../../actions/user';
 
 class ClassTable extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class ClassTable extends Component {
   }
 
   handleRowSelect = (rows) => {
-    const { AllClasses } = this.props;
+    const { AllClasses, changeTakenClasses } = this.props;
     let { page, total, selectedClasses, searchedData } = this.state;
     let selected = [];
     let deselected = [];
@@ -48,6 +49,7 @@ class ClassTable extends Component {
       if (selectedClasses.indexOf(selected[i]) === -1) {
         selectedClasses.push(selected[i]);
         this.setState({ selectedClasses });
+        changeTakenClasses(selectedClasses);
       }
     }
     for (let i = 0; i < deselected.length; i++) {
@@ -55,9 +57,9 @@ class ClassTable extends Component {
       if (index !== -1) {
         selectedClasses.splice(index, 1);
         this.setState({ selectedClasses });
+        changeTakenClasses(selectedClasses);
       }
     }
-    console.log(this.state.selectedClasses);
   }
 
   handlePaginationChange = (newPage) => {
@@ -177,6 +179,7 @@ class ClassTable extends Component {
 const mapStateToProps = (state) => {
   return {
     data: state.data,
+    user: state.user,
     AllClasses: state.data.AllClasses,
   }
 };
@@ -185,6 +188,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getAllClasses: getAllClasses,
+      changeTakenClasses: changeTakenClasses,
     },
     dispatch);
 };

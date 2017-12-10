@@ -12,6 +12,7 @@ import ThirdPage from './ThirdPage';
 
 import { getAllClasses } from './../../actions/data';
 import { triggerSignUp } from '../../actions/signup';
+import { signUpComplete } from '../../actions/user';
 
 class SignUp extends Component {
     constructor(props) {
@@ -62,7 +63,12 @@ class SignUp extends Component {
     handleNextStep = () => {
       const { stepIndex } = this.state;
       if (stepIndex == 2) {
-        const { history } = this.props;
+        const { history, signup, signUpComplete } = this.props;
+        signUpComplete({
+          name: signup.name,
+          netID: signup.netID,
+          password: signup.password,
+        });
         history.push('/home');
       }
       this.setState({
@@ -110,8 +116,9 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
   return {
     data: state.data,
-    AllClasses: state.data.AllClasses,
     signup: state.signup,
+    user: state.user,
+    AllClasses: state.data.AllClasses,
   }
 };
 
@@ -120,6 +127,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getAllClasses: getAllClasses,
       triggerSignUp: triggerSignUp,
+      signUpComplete: signUpComplete,
     },
     dispatch);
 };

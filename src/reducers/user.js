@@ -4,7 +4,7 @@ const initialState = {
   name: '',
   netID: '',
   password: '',
-  userData: {},
+  takenClasses: [],
   success: false,
   isLoading: false,
   error: false,
@@ -39,6 +39,20 @@ export default (state=initialState, action)=> {
         netID: result.id,
         password: result.password,
         success: true,
+      }
+    }
+    case 'CHANGE_USERDATA': {
+      return {
+        ...state,
+        takenClasses: action.payload,
+      }
+    }
+    case 'SIGNUP_COMPLETE': {
+      return {
+        ...state,
+        name: action.payload.name,
+        netID: action.payload.netID,
+        password: action.payload.password,
       }
     }
   }

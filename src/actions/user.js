@@ -12,6 +12,22 @@ const login = (netID, password) => (
   })
 );
 
+const changeTakenClasses = (takenClasses) => {
+  return {
+    type: 'CHANGE_USERDATA',
+    payload: takenClasses,
+  }
+}
+
+const signUpComplete = (userInfo) => {
+  return {
+    type: 'SIGNUP_COMPLETE',
+    payload: userInfo,
+  }
+}
+
 export {
   login,
+  changeTakenClasses,
+  signUpComplete
 };
