@@ -1,7 +1,5 @@
 import crud from './helpers/crud';
 
-const url = ""
-
 const getAllMajors = () => (
   crud({
     dispatch: {

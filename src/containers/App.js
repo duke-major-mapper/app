@@ -67,7 +67,7 @@ class App extends Component {
                 <ConnectedSwitch>
                   <Route path='/login' exact component={Login} />
                   <Route path='/home' exact component={Home} />
-                  <Redirect from='*' to='/login' />
+                  <Route path='/' exact component={Login} />
                 </ConnectedSwitch>
               </MuiThemeProvider>
             </ConnectedRouter>
