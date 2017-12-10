@@ -59,6 +59,11 @@ class Login extends Component {
                 hintText=""
                 floatingLabelText="netID"
                 onChange={this.handleTextFieldChange}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    this.handleSignIn();
+                  }
+                }}
               /><br />
               <TextField
                 id="password"
@@ -66,6 +71,11 @@ class Login extends Component {
                 floatingLabelText="Password"
                 type="password"
                 onChange={this.handleTextFieldChange}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    this.handleSignIn();
+                  }
+                }}
               /><br /> <br />
               <RaisedButton
                 label="Sign in"
