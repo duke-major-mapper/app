@@ -24,7 +24,7 @@ const rawBaseTheme = {
     primary3Color: blueGrey600,
     accent1Color: blueA200,
     accent2Color: blueA100,
-    accent3Color: blue200,
+    accent3Color: blue600,
     textColor: darkBlack,
     alternateTextColor: white,
     canvasColor: white,
