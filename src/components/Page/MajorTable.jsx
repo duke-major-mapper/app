@@ -16,10 +16,11 @@ import {
 class MajorTable extends Component {
 
   componentWillMount() {
-    const { majors, major } = this.props;
+    const { majors, major, user } = this.props;
     const id = majors.indexOf(major);
-    console.log('componentWillMount', major);
-    this.props.getClasses(id);
+    const takenClasses = user.takenClasses.map((val) => (val.id));
+    console.log(takenClasses);
+    this.props.getClasses(id, takenClasses);
   }
 
   mapClasses = () => {
@@ -40,6 +41,7 @@ class MajorTable extends Component {
           <TableRow key={index}>
             <TableRowColumn>{value.name}</TableRowColumn>
             <TableRowColumn>{value.class_code}</TableRowColumn>
+            <TableRowColumn>{value.description}</TableRowColumn>
           </TableRow>
         )
       })
@@ -69,8 +71,9 @@ class MajorTable extends Component {
             adjustForCheckbox={false}
           >
             <TableRow>
-              <TableHeaderColumn style={{ textAlign: 'left' }}>Class Name</TableHeaderColumn>
+              <TableHeaderColumn>Class Name</TableHeaderColumn>
               <TableHeaderColumn>Class Code</TableHeaderColumn>
+              <TableHeaderColumn>Requirement Description</TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody
@@ -90,6 +93,7 @@ const mapStateToProps = (state) => {
     sidebar: state.sidebar,
     classes: state.classes,
     data: state.data,
+    user: state.user,
     majors: state.data.majors,
   }
 };

@@ -24,14 +24,17 @@ const getAllClasses = () => (
   })
 )
 
-const getClasses = (id) => (
+const getClasses = (id, takenClasses) => (
   crud({
     dispatch: {
       begin: 'BEGIN_GET_CLASSES',
       fail: 'FAILED_GET_CLASSES',
       end: 'END_GET_CLASSES',
     },
-    method: 'GET',
+    method: 'PUT',
+    data: {
+      classes: takenClasses,
+    },
     url: '/major_classes?major_id=' + id
   })
 )

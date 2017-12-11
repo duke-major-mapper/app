@@ -36,7 +36,7 @@ export default (state=initialState, action)=> {
         ...initialState,
         netID: data.netID,
         name: data.name,
-        takenClasses: data.classes,
+        takenClasses: (data.classes ? data.classes : []),
         success: true,
       }
     }
