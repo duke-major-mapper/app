@@ -50,9 +50,10 @@ function data(state = initialState, action) {
       }
     }
     case 'END_GET_ALL_CLASSES': {
+      const { data } = action.payload.data;
       return {
         ...state,
-        AllClasses: action.payload.data,
+        AllClasses: data,
         isLoading: false,
         error: false,
       }
