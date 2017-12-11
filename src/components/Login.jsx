@@ -11,7 +11,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import SignUp from './SignUp';
 
 import { triggerSignUp } from '../actions/signup';
-import { login } from '../actions/user';
+import { login, myClasses } from '../actions/user';
 
 import logo from './../images/DMM_logo.png';
 
@@ -41,8 +41,9 @@ class Login extends Component {
 
   handleSignIn = () => {
     const { idValue, passValue } = this.state;
-    const { login, user } = this.props;
+    const { login, myClasses, user } = this.props;
     login(idValue, passValue);
+    myClasses(idValue);
   }
 
   render() {
@@ -125,6 +126,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       triggerSignUp: triggerSignUp,
       login: login,
+      myClasses: myClasses,
     },
     dispatch);
 };

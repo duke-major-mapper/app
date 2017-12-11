@@ -40,6 +40,31 @@ export default (state=initialState, action)=> {
         success: true,
       }
     }
+    case 'BEGIN_GET_MY_CLASSES': {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        errorMessage: null,
+      };
+    }
+    case 'FAILED_GET_MY_CLASSES': {
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+        errorMessage: action.payload.message,
+        success: false,
+      }
+    }
+    case 'END_GET_MY_CLASSES': {
+      const { data } = action.payload.data;
+      return {
+        ...state,
+        takenClasses: data,
+        success: true,
+      }
+    }
     case 'CHANGE_USERDATA': {
       return {
         ...state,

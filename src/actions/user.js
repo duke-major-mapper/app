@@ -16,6 +16,18 @@ const login = (netID, password) => (
   })
 );
 
+const myClasses = (netID) => (
+  crud({
+    dispatch: {
+      begin: 'BEGIN_GET_MY_CLASSES',
+      fail: 'FAILED_GET_MY_CLASSES',
+      end: 'END_GET_MY_CLASSES',
+    },
+    method: 'GET',
+    url: '/my_classes?net_id=' + netID
+  })
+)
+
 const changeTakenClasses = (takenClasses) => {
   return {
     type: 'CHANGE_USERDATA',
@@ -52,6 +64,7 @@ const signUp = (userInfo) => {
 
 export {
   login,
+  myClasses,
   changeTakenClasses,
   signUpComplete
 };

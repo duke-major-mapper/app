@@ -56,17 +56,16 @@ app.get('/my_classes', function (req, res) {
         WHERE Class.id=UserClasses.class_id
         AND UserClasses.uid='${net_id}';`, function (error, result) {
           if (error) {
-            var result = template;
-            result.status = 500;
-            result.success = false;
-            result.message = (error.sqlMessage ? error.sqlMessage : error);
-            res.status(500).send(result);
+            template.status = 500;
+            template.success = false;
+            template.message = (error.sqlMessage ? error.sqlMessage : error);
+            res.status(500).send(template);
           } else {
-            result.status = 200;
-            result.data = result;
-            result.message = 'Classes recieved';
-            result.id = net_id;
-            res.status(200).send(result);
+            template.status = 200;
+            template.data = result;
+            template.message = 'Classes recieved';
+            template.id = net_id;
+            res.status(200).send(template);
           }
         }
     );
