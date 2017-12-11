@@ -7,6 +7,7 @@ import {Card, CardMedia, CardHeader} from 'material-ui/Card';
 
 import Welcome from './../components/Page/Welcome';
 import MajorTable from './../components/Page/MajorTable';
+import MyClasses from './../components/Page/MyClasses';
 import Overlap from './../components/Page/Overlap';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
@@ -57,6 +58,9 @@ class Home extends Component {
                   </Tab>
                   : null
                 }
+                <Tab label="My Classes">
+                  <MyClasses />
+                </Tab>
               </Tabs>
             }
 
