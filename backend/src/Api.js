@@ -177,36 +177,7 @@ app.get('/overlap', function (req, res) {
 
 // API Requests for Users
 
-// GET Classes a user has taken
-app.get('/takenClasses/:id', function (req, res) {
-    const user_id = req.params.id;
-    if (!user_id) {
-        res.status(400).send("You did not supply the user id");
-        console.log('FAILED: GET ' + req.originalUrl);
-        return;
-    }
-    var requestObject = requestTemplate;
-    connection.query(
-        `SELECT * FROM UserClasses
-        WHERE uid = ${user_id}) AS Taken`, function (error, result) {
-          if (error) {
-            requestObject.status = 500;
-            requestObject.success = false;
-            requestObject.message = (error.sqlMessage ? error.sqlMessage : error);
-            res.status(500).send(requestObject);
-          } else {
-            requestObject.status = 200;
-            requestObject.data = result;
-            requestObject.message = 'Classes recieved';
-            requestObject.id = user_id;
-            res.status(200).send(requestObject);
-          }
-        }
-    );
-    // may need to json.parse(data)
-    console.log('GET ' + req.originalUrl);
-});
-
+require('./Api/MyClasses');
 require('./Api/Login');
 
 //GET newUser
