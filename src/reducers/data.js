@@ -66,7 +66,7 @@ function data(state = initialState, action) {
       };
     }
     case 'FAILED_GET_CLASSES': {
-      return {
+        return {
         ...state,
         error: true,
         errorMessage: action.payload.message,

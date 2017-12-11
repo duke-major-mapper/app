@@ -32,7 +32,7 @@ const getClasses = (id) => (
       end: 'END_GET_CLASSES',
     },
     method: 'GET',
-    url: '/classes/' + id
+    url: '/major_classes?major_id=' + id
   })
 )
 

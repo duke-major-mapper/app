@@ -6,20 +6,19 @@ app.get('/majors', function (req, res) {
       connection.query(
           `SELECT * FROM Major;`, function (error, result) {
             if (error) {
-              var result = template;
-              result.status = 500;
-              result.success = false;
-              result.message = error;
-              res.status(500).send(result);
+              template.status = 500;
+              template.success = false;
+              template.message = error;
+              res.status(500).send(template);
             } else {
               data = [''];
               for (var i = 0; i < result.length; i++) {
                 data[result[i].id] = result[i].name
               }
-              result.status = 200;
-              result.data = data;
-              result.message = 'Major names recieved';
-              res.status(200).send(result);
+              template.status = 200;
+              template.data = data;
+              template.message = 'Major names recieved';
+              res.status(200).send(template);
             }
           }
       );
