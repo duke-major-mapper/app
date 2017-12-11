@@ -54,6 +54,6 @@
     "backend": "node backend/src/Api.js"
   },
   "devDependencies": {
-    "concurrently": "^3.5.0"
+    "concurrently": "^3.5.1"
   }
 }
