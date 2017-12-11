@@ -26,7 +26,7 @@ class Home extends Component {
   }
 
   render(){
-    const { sidebar, classes, data } = this.props
+    const { sidebar, user, data } = this.props
 
     if (sidebar.submitted){
       showWelcome = false
@@ -35,7 +35,7 @@ class Home extends Component {
       <div
         className={sidebar.docked ? "true-dock" : "false-dock"}
       >
-        {showWelcome|| !sidebar.submitted ? <Welcome /> :
+        {showWelcome|| !sidebar.submitted ? <Welcome name={user.name} /> :
           <Card
             style={cardStyles}
           >
@@ -93,8 +93,8 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     sidebar: state.sidebar,
-    classes: state.classes,
     data: state.data,
+    user: state.user,
     majors: state.data.majors,
   }
 };

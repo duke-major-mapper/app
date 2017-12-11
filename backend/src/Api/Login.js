@@ -4,8 +4,8 @@ const connection = require('../shared/Connection');
 
 
 app.put('/login', function (req, res) {
-    const id = req.body['id'];
-    const pw = req.body['pw'];
+    const id = req.body.netID;
+    const pw = req.body.password;
 
     if (!id) {
         res.status(400).send("Please provide an id parameter");
@@ -16,7 +16,6 @@ app.put('/login', function (req, res) {
         return;
     }
 
-    const result = template;
     connection.query(
         `SELECT * FROM User WHERE id LIKE '%${id}%'`, function (error, result) {
             if (error) {
@@ -37,6 +36,8 @@ app.put('/login', function (req, res) {
             } else {
                 res.status(200).send({
                     success: true,
+                    netID: id,
+                    name: result[0].name,
                     msg: 'login verified'
                 });
             }
