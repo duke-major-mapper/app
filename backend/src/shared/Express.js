@@ -6,6 +6,13 @@ const bodyParser = require('body-parser');
 const app = express();
 const localPort = 8080;
 
+const template = {
+  status: null,
+  message: '',
+  success: true,
+  data: [],
+};
+
 app.set('port', (process.env.PORT || localPort));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
@@ -21,4 +28,7 @@ app.listen(app.get('port'), function() {
   console.log('API is listening on', app.get('port'));
 });
 
-module.exports = app;
+module.exports = {
+  'app' : app,
+  'template' : template,
+};

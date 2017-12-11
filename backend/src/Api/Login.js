@@ -1,0 +1,47 @@
+const app = require('../shared/Express').app;
+const template = require('../shared/Express').template;
+const connection = require('../shared/Connection');
+
+
+app.put('/login', function (req, res) {
+    const id = req.body['id'];
+    const pw = req.body['pw'];
+
+    if (!id) {
+        res.status(400).send("Please provide an id parameter");
+        return;
+    }
+    if (!pw) {
+        res.status(400).send("Please provide a password parameter");
+        return;
+    }
+
+    const result = template;
+    connection.query(
+        `SELECT * FROM User WHERE id LIKE '%${id}%'`, function (error, result) {
+            if (error) {
+              res.status(500).send({
+                  success: false,
+                  msg: (error.sqlMessage ? error.sqlMessage : error)
+              });
+            } else if (result.length < 1) {
+                res.status(400).send({
+                    success: false,
+                    msg: 'user id not found'
+                });
+            } else if (result[0].password !== pw) {
+                res.status(400).send({
+                    success: false,
+                    msg: 'incorrect password'
+                });
+            } else {
+                res.status(200).send({
+                    success: true,
+                    msg: 'login verified'
+                });
+            }
+          }
+    );
+
+    console.log('GET ' + req.originalUrl);
+});

@@ -3,7 +3,7 @@
 const extend = require('lodash').assign;
 const mysql = require('mysql');
 const config = require('./../config.json');
-const app = require('./shared/Express');
+const app = require('./shared/Express').app;
 
 const options = {
   user: config['MYSQL_USER'],
@@ -207,51 +207,7 @@ app.get('/takenClasses/:id', function (req, res) {
     console.log('GET ' + req.originalUrl);
 });
 
-// GET request that will act as login Auth
-app.get('/login', function (req, res) {
-    let id = req.query['id'];
-    let pw = req.query['pw'];
-
-    if (!id) {
-        res.status(400).send("Please provide an id parameter");
-        console.log('FAILED: GET ' + req.originalUrl);
-        return;
-    }
-    if (!pw) {
-        res.status(400).send("Please provide a password parameter");
-        console.log('FAILED: GET ' + req.originalUrl);
-        return;
-    }
-
-    var requestObject = requestTemplate;
-    connection.query(
-        `SELECT * FROM User WHERE id LIKE '%${id}%'`, function (error, result) {
-            if (error) {
-              requestObject.status = 500;
-              requestObject.success = false;
-              requestObject.message = (error.sqlMessage ? error.sqlMessage : error);
-              res.status(500).send(requestObject);
-            } else if (result.length < 1) {
-              requestObject.status = 400;
-              requestObject.success = false;
-              requestObject.message = ('user id not found');
-              res.status(400).send(requestObject);
-            } else if (result[0].password !== pw) {
-              requestObject.status = 400;
-              requestObject.success = false;
-              requestObject.message = ('incorrect password');
-              res.status(400).send(requestObject);
-            } else {
-              requestObject.status = 200;
-              requestObject.data = result;
-              requestObject.message = 'login verified';
-              res.status(200).send(requestObject);
-            }
-          }
-    );
-    // may need to json.parse(data)
-    console.log('GET ' + req.originalUrl);
-});
+require('./Api/Login');
 
 //GET newUser
 app.get('/newUser', function (req, res) {

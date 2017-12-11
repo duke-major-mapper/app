@@ -11,6 +11,8 @@ Steps:
    - Make sure you have the cloud_sql_proxy installed appropriatly and that you have the proxy_keys.json file in the `backend` directory (This is important! Please do not put the file in the root directory). Refer to Aman for further detail.
    - Use following command to run proxy: `./cloud_sql_proxy -instances="duke-major-planner:us-east1:dmp-mysql-instance"=tcp:3306 -credential_file="proxy_keys.json" &`
 
+   `./cloud_sql_proxy -dir=/cloudsql -instances="duke-major-planner:us-east1:dmp-mysql-instance" \-credential_file="proxy_keys.json" &`
+
    3b. If preparing for production, run `yarn build`... [More info to be added]
 
 4. Run `yarn start` to run frontend and api at once. 
