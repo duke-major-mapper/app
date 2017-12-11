@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 
 proxy_keys.json
+.env*
