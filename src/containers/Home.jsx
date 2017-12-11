@@ -8,6 +8,7 @@ import {Card, CardMedia, CardHeader} from 'material-ui/Card';
 import Welcome from './../components/Page/Welcome';
 import MajorTable from './../components/Page/MajorTable';
 import Overlap from './../components/Page/Overlap';
+import {Tabs, Tab} from 'material-ui/Tabs';
 
 import { getAllMajors } from './../actions/data';
 import { getClasses } from './../actions/data';
@@ -35,46 +36,28 @@ class Home extends Component {
       <div
         className={sidebar.docked ? "true-dock" : "false-dock"}
       >
-        {showWelcome|| !sidebar.submitted ? <Welcome name={user.name} /> :
-          <Card
-            style={cardStyles}
-          >
-            <CardHeader
-              title={<h2 style={{ color: '#0d47a1' }}>{sidebar.major1 + ' (All Classes)'}</h2>}
-              actAsExpander={true}
-              showExpandableButton={true}
-            />
-            <CardMedia
-              expandable={true}
-            >
-              <MajorTable
-                major={sidebar.major1}
-              />
-            </CardMedia>
-          </Card>
-        }
-          { sidebar.major2 === '' || showWelcome || !sidebar.submitted ? null :
-            <Card
-              style={cardStyles}
-            >
-              <CardHeader
-                title={<h2 style={{ color: '#0d47a1' }}>{sidebar.major2 + ' (All Classes)'}</h2>}
-                actAsExpander={true}
-                showExpandableButton={true}
-              />
-              <CardMedia
-                expandable={true}
-              >
-                <MajorTable
-                  major={sidebar.major2}
-                />
-              </CardMedia>
-            </Card>
-          }
-            {
-              sidebar.major2 && sidebar.submitted ?
-              <Overlap />
-              : null
+            {showWelcome|| !sidebar.submitted ? <Welcome name={user.name} /> :
+              <Tabs>
+                <Tab label={sidebar.major1}>
+                  <MajorTable
+                    major={sidebar.major1}
+                  />
+                </Tab>
+                { sidebar.major2 === '' || showWelcome || !sidebar.submitted ? null :
+                <Tab label={sidebar.major2}>
+                  <MajorTable
+                    major={sidebar.major2}
+                  />
+                </Tab>
+                }
+                {
+                  sidebar.major2 && sidebar.submitted ?
+                  <Tab label="Overlap">
+                    <Overlap />
+                  </Tab>
+                  : null
+                }
+              </Tabs>
             }
 
             {/* Loading Animation stays on the bottom */}
