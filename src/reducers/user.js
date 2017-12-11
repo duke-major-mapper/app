@@ -32,12 +32,10 @@ export default (state=initialState, action)=> {
     }
     case 'END_LOGIN': {
       const { data } = action.payload;
-      const result = data.data[0];
       return {
         ...initialState,
-        name: result.name,
-        netID: result.id,
-        password: result.password,
+        netID: data.netID,
+        name: data.name,
         success: true,
       }
     }

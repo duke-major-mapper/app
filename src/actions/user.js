@@ -7,8 +7,12 @@ const login = (netID, password) => (
       fail: 'FAILED_LOGIN',
       end: 'END_LOGIN',
     },
-    method: 'GET',
-    url: '/login?id=' + netID + '&pw=' + password,
+    method: 'PUT',
+    url: '/login',
+    data: {
+      netID: netID,
+      password: password
+    }
   })
 );
 

@@ -63,7 +63,7 @@ class App extends Component {
           <div>
             <ConnectedRouter history={history}>
               <MuiThemeProvider muiTheme={theme}>
-                <Header />
+                <Header history={history}/>
                 <ConnectedSwitch>
                   <Route path='/login' exact component={Login} />
                   <Route path='/home' exact component={Home} />
