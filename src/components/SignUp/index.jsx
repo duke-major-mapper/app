@@ -63,11 +63,15 @@ class SignUp extends Component {
     handleNextStep = () => {
       const { stepIndex } = this.state;
       if (stepIndex == 2) {
-        const { history, signup, signUpComplete } = this.props;
+        const { history, signup, signUpComplete, user } = this.props;
+        const { takenClasses } = user;
         signUpComplete({
           name: signup.name,
-          netID: signup.netID,
+          net_id: signup.netID,
           password: signup.password,
+          classes: takenClasses.map((val, index, arr) => {
+            return val.id;
+          }),
         });
         history.push('/home');
       }

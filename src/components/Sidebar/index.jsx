@@ -13,7 +13,7 @@ class Sidebar extends Component {
   };
 
   onButtonClicked() {
-    const { data, majors, major1, major2, getClasses } = this.props;
+    const { data, user, majors, major1, major2, getClasses } = this.props;
     if(major1 === ''){
       this.setState({error: 'Please enter a Major 1.'})
       return;
@@ -26,12 +26,13 @@ class Sidebar extends Component {
     this.props.buttonTriggered();
     const id1 = majors.indexOf(major1);
     const id2 = majors.indexOf(major2);
+    const takenClasses = user.takenClasses.map((val) => (val.id));
 
     if (!data.classes[id1]) {
-      getClasses(id1);
+      getClasses(id1, takenClasses);
     }
     if (!data.classes[id2]) {
-      getClasses(id2);
+      getClasses(id2, takenClasses);
     }
   }
 
@@ -64,6 +65,7 @@ const mapStateToProps = (state) => {
     major1: state.sidebar.major1,
     major2: state.sidebar.major2,
     data: state.data,
+    user: state.user,
     majors: state.data.majors,
   }
 };

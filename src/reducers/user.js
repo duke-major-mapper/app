@@ -36,6 +36,32 @@ export default (state=initialState, action)=> {
         ...initialState,
         netID: data.netID,
         name: data.name,
+        takenClasses: (data.classes ? data.classes : []),
+        success: true,
+      }
+    }
+    case 'BEGIN_GET_MY_CLASSES': {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        errorMessage: null,
+      };
+    }
+    case 'FAILED_GET_MY_CLASSES': {
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+        errorMessage: action.payload.message,
+        success: false,
+      }
+    }
+    case 'END_GET_MY_CLASSES': {
+      const { data } = action.payload.data;
+      return {
+        ...state,
+        takenClasses: data,
         success: true,
       }
     }

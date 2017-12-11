@@ -50,9 +50,10 @@ function data(state = initialState, action) {
       }
     }
     case 'END_GET_ALL_CLASSES': {
+      const { data } = action.payload.data;
       return {
         ...state,
-        AllClasses: action.payload.data.data,
+        AllClasses: data,
         isLoading: false,
         error: false,
       }
@@ -66,7 +67,7 @@ function data(state = initialState, action) {
       };
     }
     case 'FAILED_GET_CLASSES': {
-      return {
+        return {
         ...state,
         error: true,
         errorMessage: action.payload.message,

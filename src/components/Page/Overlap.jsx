@@ -29,7 +29,7 @@ const cardStyles = {
 
 
 class Overlap extends Component {
-  handleClick = () => {
+  componentWillMount() {
     const { sidebar, data, majors, getOverlap, overlapTriggered } = this.props;
     const major1 = sidebar.major1;
     const major2 = sidebar.major2;
@@ -48,35 +48,7 @@ class Overlap extends Component {
 
     return (
       <div>
-        { !sidebar.overlapSubmitted ?
-          <div
-            style={style}
-          >
-            <RaisedButton
-              label="Overlap"
-              labelStyle={labelStyle}
-              secondary={true}
-              onClick={this.handleClick.bind(this)}
-              fullWidth={true}
-              buttonStyle={buttonStyle}
-            />
-          </div>
-           :
-          <Card
-            style={cardStyles}
-          >
-            <CardHeader
-              title={<h2 style={{ color: '#0d47a1' }}>{major1 + ' + ' + major2 + ' (Overlapping Classes)'}</h2>}
-              actAsExpander={true}
-              showExpandableButton={true}
-            />
-            <CardMedia
-              expandable={true}
-            >
-              <MajorTable overlappedClasses={data.overlap} />
-            </CardMedia>
-          </Card>
-        }
+          <MajorTable overlappedClasses={data.overlap} />
       </div>
     );
   }
