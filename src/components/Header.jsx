@@ -21,8 +21,7 @@ class Header extends Component {
   }
 
   signOut = () => {
-    const { push } = this.props.history;
-    push('/login');
+    window.location = '/login'
   }
 
   render() {

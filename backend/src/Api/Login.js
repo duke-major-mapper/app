@@ -34,6 +34,7 @@ app.put('/login', function (req, res) {
                     msg: 'incorrect password'
                 });
             } else {
+              console.log('result',result);
                 res.status(200).send({
                     success: true,
                     netID: id,

@@ -23,11 +23,31 @@ const changeTakenClasses = (takenClasses) => {
   }
 }
 
-const signUpComplete = (userInfo) => {
-  return {
-    type: 'SIGNUP_COMPLETE',
-    payload: userInfo,
-  }
+const signUpComplete = (userInfo) => (
+  crud({
+    dispatch: {
+      begin: 'BEGIN_LOGIN',
+      fail: 'FAILED_LOGIN',
+      end: 'END_LOGIN',
+    },
+    method: 'PUT',
+    url: '/new_user',
+    data: userInfo,
+  })
+)
+
+const signUp = (userInfo) => {
+  console.log('here');
+  return crud({
+    dispatch: {
+      begin: 'BEGIN_LOGIN',
+      fail: 'FAILED_LOGIN',
+      end: 'END_LOGIN',
+    },
+    method: 'PUT',
+    url: '/new_user',
+    data: userInfo,
+  })
 }
 
 export {

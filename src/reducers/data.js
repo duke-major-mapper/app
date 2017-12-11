@@ -52,7 +52,7 @@ function data(state = initialState, action) {
     case 'END_GET_ALL_CLASSES': {
       return {
         ...state,
-        AllClasses: action.payload.data.data,
+        AllClasses: action.payload.data,
         isLoading: false,
         error: false,
       }

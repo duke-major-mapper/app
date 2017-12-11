@@ -4,7 +4,7 @@ const connection = require('../shared/Connection');
 
 app.get('/classes', function (req, res) {
       connection.query(
-          `SELECT class_code, name FROM Class`, function (error, result) {
+          `SELECT * FROM Class`, function (error, result) {
                 if (error) {
                   var result = template;
                   result.status = 500;

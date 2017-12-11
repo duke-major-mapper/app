@@ -56,13 +56,16 @@ app.put('/new_user', function (req, res) {
 
     if (success) {
         res.status(200).send({
-            'message': 'Account created',
-            'success' :true,
+            message: 'Account created',
+            netID: net_id,
+            name: name,
+            classes: classes,
+            success: true,
         });
     } else {
         res.status(500).send({
-            'message': 'Something went wrong',
-            'success' :false,
+            message: 'Something went wrong',
+            success: false,
         });
     }
 });
