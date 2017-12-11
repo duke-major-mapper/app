@@ -49,7 +49,6 @@ const signUpComplete = (userInfo) => (
 )
 
 const signUp = (userInfo) => {
-  console.log('here');
   return crud({
     dispatch: {
       begin: 'BEGIN_LOGIN',

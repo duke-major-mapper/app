@@ -19,7 +19,6 @@ class MajorTable extends Component {
     const { majors, major, user } = this.props;
     const id = majors.indexOf(major);
     const takenClasses = user.takenClasses.map((val) => (val.id));
-    console.log(takenClasses);
     this.props.getClasses(id, takenClasses);
   }
 

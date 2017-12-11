@@ -19,13 +19,11 @@ app.put('/my_classes', function (req, res) {
     var success = true
 
     classes.forEach(cl => {
-        console.log(cl);
         connection.query(
             `INSERT INTO UserClasses
             VALUES ('${net_id}', ${cl});`, function (error, result) {
               if (error) {
                     success = false;
-                    console.log(result);
               }
             }
         );
@@ -41,7 +39,7 @@ app.put('/my_classes', function (req, res) {
         });
     }
 });
-  
+
 app.get('/my_classes', function (req, res) {
     const net_id = req.query.net_id;
 
