@@ -55,7 +55,7 @@ class MyClasses extends Component {
         }}
       >
         <Table
-          height='300px'
+          height='308px'
           selectable={false}
         >
           <TableHeader
