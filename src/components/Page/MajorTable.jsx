@@ -50,7 +50,7 @@ class MajorTable extends Component {
   }
 
   render() {
-    const { sidebar } = this.props;
+    const { sidebar, overlappedClasses } = this.props;
     if (!sidebar.submitted) {
       return null;
     }
@@ -72,7 +72,8 @@ class MajorTable extends Component {
             <TableRow>
               <TableHeaderColumn>Class Name</TableHeaderColumn>
               <TableHeaderColumn>Class Code</TableHeaderColumn>
-              <TableHeaderColumn>Requirement Description</TableHeaderColumn>
+              {overlappedClasses ? null :
+                <TableHeaderColumn>Requirement Description</TableHeaderColumn>}
             </TableRow>
           </TableHeader>
           <TableBody

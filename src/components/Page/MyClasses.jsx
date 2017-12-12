@@ -17,9 +17,10 @@ class MyClasses extends Component {
 
   componentWillMount() {
     const { majors, major, user, myClasses } = this.props;
-    if (user.netID && !user.takenClasses) {
+    if (user.netID) {
       myClasses(user.netID);
     } else {
+      console.log('here');
       myClasses('ami10');
     }
   }
