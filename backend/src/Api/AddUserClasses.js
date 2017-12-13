@@ -8,12 +8,12 @@ app.put('/add_user_classes', function (req, res) {
 
     if (!net_id) {
         res.status(400).send("Please provide an net id parameter");
-        console.log('FAILED: GET ' + req.originalUrl);
+        console.log('FAILED: PUT ' + req.originalUrl);
         return;
     }
     if (!classes) {
         res.status(400).send("Please provide a classes parameter");
-        console.log('FAILED: GET ' + req.originalUrl);
+        console.log('FAILED: PUT ' + req.originalUrl);
         return;
     }
 
@@ -30,6 +30,7 @@ app.put('/add_user_classes', function (req, res) {
                         template.message = (error.sqlMessage ? error.sqlMessage : 'error');
                         res.status(500).send(template);
                         success=false;
+                        console.log('FAILED: PUT ' + req.originalUrl);
                         return;
                     }
                     else{
