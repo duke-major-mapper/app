@@ -7,3 +7,5 @@ require('./Api/Login');
 require('./Api/NewUser');
 require('./Api/ReqStatus');
 require('./Api/UpdatePassword');
+require('./Api/AddUserClasses');
+require('./Api/DeleteUserClasses');
