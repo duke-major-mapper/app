@@ -10,9 +10,10 @@ import MajorTable from './../components/Page/MajorTable';
 import MyClasses from './../components/Page/MyClasses';
 import ReqsTable from './../components/Page/ReqsTable';
 import Overlap from './../components/Page/Overlap';
+import ClassTable from './../components/SignUp/ClassTable';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-import { getAllMajors, getClasses, getReqs } from './../actions/data';
+import { getAllMajors, getClasses, getReqs, getAllClasses } from './../actions/data';
 
 let showWelcome = true;
 
@@ -25,6 +26,7 @@ class Home extends Component {
 
   componentWillMount() {
     this.props.getAllMajors();
+    this.props.getAllClasses();
   }
 
   render(){
@@ -68,6 +70,20 @@ class Home extends Component {
                 }
                 <Tab label="My Classes">
                   <MyClasses />
+                  <Card
+                    style={cardStyles}
+                  >
+                    <CardHeader
+                          title="Edit Classes"
+                          actAsExpander={true}
+                          showExpandableButton={true}
+                    />
+                    <CardMedia
+                      expandable={true}
+                    >
+                      <ClassTable />
+                    </CardMedia>
+                  </Card>
                 </Tab>
               </Tabs>
             }
@@ -100,6 +116,7 @@ const mapDispatchToProps = (dispatch) => {
       getClasses: getClasses,
       getAllMajors: getAllMajors,
       getReqs: getReqs,
+      getAllClasses: getAllClasses,
     },
     dispatch);
 };
