@@ -17,6 +17,11 @@ Steps:
 
 4. Run `yarn start` to run frontend and api at once. 
 
+## Code Structure
+
+- The Web App can be found in `/src/`. [Primarly uses: React, Redux]
+- The API can be found in `/backend/`. Individual endpoints are in `/backend/Api/`. [Primarly uses: Express]
+
 
 ## Recent Screenshots
 
