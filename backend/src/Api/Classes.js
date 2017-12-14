@@ -35,7 +35,7 @@ app.get('/classes', function (req, res) {
         additonalQuery = `AND id NOT IN ( ${classes.toString()} )`
       }
       connection.query(
-          `SELECT * FROM Class JOIN (SELECT Fulfills.class_id, Requirements.major_id, Requirements.req_id, Requirements.num_needed, Requirements.description  FROM Fulfills, Requirements   WHERE Fulfills.major_id = Requirements.major_id and Requirements.req_id = Fulfills.req_id) AS Reqs WHERE id = class_id and Reqs.major_id = ${major_id} ${additonalQuery};`, function (error, result) {
+          `SELECT * FROM Class JOIN (SELECT Fulfills.class_id, Requirements.major_id, Requirements.req_id, Requirements.num_needed, Requirements.description  FROM Fulfills, Requirements   WHERE Fulfills.major_id = Requirements.major_id and Requirements.req_id = Fulfills.req_id) AS Reqs WHERE id = class_id and Reqs.major_id = ${major_id} ${additonalQuery} ORDER BY Reqs.req_id;`, function (error, result) {
                 if (error) {
                   template.status = 500;
                   template.success = false;

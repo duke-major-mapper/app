@@ -57,8 +57,12 @@ app.put('/req_status', function (req, res) {
                       processed++;
                       if (result.length==1){
                         var reqNum = result[0].req_id;
+                        if (reqs.length < reqNum) {
+                          console.log('TEST HERE');
+                          return;
+                        }
                         reqs[reqNum-1].fulfilled += 1;
-                      } 
+                      }
                       if (success && processed == classes.length){
                         template.status = 200;
                         template.data = reqs;
@@ -133,7 +137,7 @@ app.get('/req_status', function (req, res) {
                       if (result.length==1){
                         var reqNum = result[0].req_id;
                         reqs[reqNum-1].fulfilled += 1;
-                      } 
+                      }
                       if (success && processed == classes.length){
                         template.status = 200;
                         template.data = reqs;
