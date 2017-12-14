@@ -20,7 +20,6 @@ class MyClasses extends Component {
     if (user.netID) {
       myClasses(user.netID);
     } else {
-      console.log('here');
       myClasses('ami10');
     }
   }

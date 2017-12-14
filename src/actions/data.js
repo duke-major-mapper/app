@@ -51,9 +51,26 @@ const getOverlap = (id1, id2) => (
   })
 )
 
+const getReqs = (major, classes) => (
+  crud({
+    dispatch: {
+      begin: 'BEGIN_GET_REQS',
+      fail: 'FAILED_GET_REQS',
+      end: 'END_GET_REQS',
+    },
+    data: {
+      major: major,
+      classes: classes,
+    },
+    method: 'PUT',
+    url: '/req_status'
+  })
+)
+
 export {
   getAllMajors,
   getAllClasses,
   getClasses,
   getOverlap,
+  getReqs
 };

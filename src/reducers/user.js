@@ -1,4 +1,3 @@
-import { push } from 'react-router-redux';
 
 const initialState = {
   name: '',

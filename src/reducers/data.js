@@ -2,7 +2,7 @@ const initialState = {
   isLoading: false,
   majors: [],
   classes: {},
-  requirements: [],
+  requirements: {},
   overlap: [],
   error: false,
   errorMessage: null,
@@ -103,6 +103,32 @@ function data(state = initialState, action) {
       return {
         ...state,
         overlap: action.payload.data.data,
+        isLoading: false,
+        error: false,
+      }
+    }
+    case 'BEGIN_GET_REQS': {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        errorMessage: null,
+      };
+    }
+    case 'FAILED_GET_REQS': {
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.message,
+      }
+    }
+    case 'END_GET_REQS': {
+      let temp_reqs = state.requirements;
+      const data = action.payload.data.data;
+      temp_reqs[data[0].major_id] = data;
+      return {
+        ...state,
+        requirements: temp_reqs,
         isLoading: false,
         error: false,
       }

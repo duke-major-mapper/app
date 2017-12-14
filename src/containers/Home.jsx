@@ -8,11 +8,11 @@ import {Card, CardMedia, CardHeader} from 'material-ui/Card';
 import Welcome from './../components/Page/Welcome';
 import MajorTable from './../components/Page/MajorTable';
 import MyClasses from './../components/Page/MyClasses';
+import ReqsTable from './../components/Page/ReqsTable';
 import Overlap from './../components/Page/Overlap';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-import { getAllMajors } from './../actions/data';
-import { getClasses } from './../actions/data';
+import { getAllMajors, getClasses, getReqs } from './../actions/data';
 
 let showWelcome = true;
 
@@ -28,9 +28,9 @@ class Home extends Component {
   }
 
   render(){
-    const { sidebar, user, data } = this.props
+    const { sidebar, user, data, majors } = this.props
 
-    if (sidebar.submitted){
+    if (sidebar.submitted) {
       showWelcome = false
     }
     return(
@@ -43,11 +43,19 @@ class Home extends Component {
                   <MajorTable
                     major={sidebar.major1}
                   />
+                  <ReqsTable
+                    majorID={majors.indexOf(sidebar.major1)}
+                    reqs={data.requirements}
+                  />
                 </Tab>
                 { sidebar.major2 === '' || showWelcome || !sidebar.submitted ? null :
                 <Tab label={sidebar.major2}>
                   <MajorTable
                     major={sidebar.major2}
+                  />
+                  <ReqsTable
+                    majorID={majors.indexOf(sidebar.major2)}
+                    reqs={data.requirements}
                   />
                 </Tab>
                 }
@@ -91,6 +99,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getClasses: getClasses,
       getAllMajors: getAllMajors,
+      getReqs: getReqs,
     },
     dispatch);
 };

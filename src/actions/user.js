@@ -9,6 +9,7 @@ const login = (netID, password) => (
     },
     method: 'PUT',
     url: '/login',
+    push: '/home',
     data: {
       netID: netID,
       password: password

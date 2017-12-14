@@ -50,7 +50,6 @@ class Login extends Component {
     const { signup, triggerSignUp, login, user, history } = this.props;
     return (
       <div className="signup">
-        { user.success ?  history.push('/home') : null}
         {!signup.signup ?
           <Card>
             <div style={{ padding: '24px' }}>

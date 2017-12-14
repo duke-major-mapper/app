@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 
-import { getClasses } from './../../actions/data';
+import { getClasses, getReqs } from './../../actions/data';
 
 import {
   Table,
@@ -16,10 +16,11 @@ import {
 class MajorTable extends Component {
 
   componentWillMount() {
-    const { majors, major, user } = this.props;
-    const id = majors.indexOf(major);
-    const takenClasses = user.takenClasses.map((val) => (val.id));
-    this.props.getClasses(id, takenClasses);
+    const { majors, major, user, sidebar, getReqs, getClasses } = this.props;
+    const majorID = majors.indexOf(major);
+    const takenClassesIDs = user.takenClasses.map((val) => (val.id));
+    getClasses(majorID, takenClassesIDs);
+    getReqs(majorID, takenClassesIDs);
   }
 
   mapClasses = () => {
@@ -102,6 +103,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       getClasses: getClasses,
+      getReqs: getReqs,
     },
     dispatch);
 };

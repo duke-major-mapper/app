@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { push } from 'react-router-redux';
 
 const crud = request => async (dispatch) => {
   dispatch({
@@ -14,6 +15,9 @@ const crud = request => async (dispatch) => {
             type: request.dispatch.end,
             payload: res,
           });
+      if (request.push) {
+        dispatch(push(request.push));
+      }
     })
     .catch((err) => {
       dispatch({
