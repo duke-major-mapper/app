@@ -58,7 +58,6 @@ app.put('/req_status', function (req, res) {
                       if (result.length==1){
                         var reqNum = result[0].req_id;
                         if (reqs.length < reqNum) {
-                          console.log('TEST HERE');
                           return;
                         }
                         reqs[reqNum-1].fulfilled += 1;
