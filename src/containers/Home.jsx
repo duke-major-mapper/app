@@ -81,7 +81,8 @@ class Home extends Component {
                     <CardMedia
                       expandable={true}
                     >
-                      <ClassTable />
+                      {/* TODO: Create Editing table */}
+                      {/* <ClassTable /> */}
                     </CardMedia>
                   </Card>
                 </Tab>
