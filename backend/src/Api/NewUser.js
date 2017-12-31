@@ -4,7 +4,7 @@ const connection = require('../shared/Connection');
 const sha256 = require('js-sha256');
 
 app.put('/new_user', function (req, res) {
-    const net_id = req.body.netID;
+    const net_id = req.body.net_id;
     const password = req.body.password;
     const name = req.body.name;
     const classes = req.body.classes;
