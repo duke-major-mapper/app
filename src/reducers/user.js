@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   error: false,
   errorMessage: null,
+  isLoggedIn: false,
 };
 
 export default (state=initialState, action)=> {
@@ -37,6 +38,7 @@ export default (state=initialState, action)=> {
         name: data.name,
         takenClasses: (data.classes ? data.classes : []),
         success: true,
+        isLoggedIn: true,
       }
     }
     case 'BEGIN_GET_MY_CLASSES': {
@@ -76,6 +78,30 @@ export default (state=initialState, action)=> {
         name: action.payload.name,
         netID: action.payload.netID,
         password: action.payload.password,
+      }
+    }
+    case 'BEGIN_LOGOUT': {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        errorMessage: null,
+      }
+    }
+    case 'FAILED_LOGOUT': {
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+        errorMessage: action.payload.message,
+        success: false,
+      }
+    }
+    case 'END_LOGOUT': {
+      const { data } = action.payload;
+      return {
+        ...initialState,
+        success: true,
       }
     }
   }

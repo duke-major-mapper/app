@@ -4,6 +4,7 @@ require('./Api/Requirements');
 require('./Api/Overlap');
 require('./Api/MyClasses');
 require('./Api/Login');
+require('./Api/Logout');
 require('./Api/NewUser');
 require('./Api/ReqStatus');
 require('./Api/UpdatePassword');

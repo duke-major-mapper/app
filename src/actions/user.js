@@ -17,6 +17,22 @@ const login = (netID, password) => (
   })
 );
 
+const logout = (netID) => (
+  crud({
+    dispatch: {
+      begin: 'BEGIN_LOGOUT',
+      fail: 'FAILED_LOGOUT',
+      end: 'END_LOGOUT',
+    },
+    method: 'PUT',
+    url: '/logout',
+    push: '/login',
+    data: {
+      netID: netID
+    }
+  })
+);
+
 const myClasses = (netID) => (
   crud({
     dispatch: {
@@ -64,6 +80,7 @@ const signUp = (userInfo) => {
 
 export {
   login,
+  logout,
   myClasses,
   changeTakenClasses,
   signUpComplete

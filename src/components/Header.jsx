@@ -11,6 +11,7 @@ import IconButton from 'material-ui/IconButton';
 
 import { dockTriggered } from "./../actions/sidebar-action";
 import { getAllMajors } from './../actions/data';
+import { logout } from './../actions/user';
 import Sidebar from "./Sidebar";
 
 import DMM_header from './../images/DMM_header.png';
@@ -21,7 +22,9 @@ class Header extends Component {
   }
 
   signOut = () => {
-    window.location = '/login'
+    const { user, logout } = this.props;
+    const { netID } = user;
+    logout(netID);
   }
 
   render() {
@@ -60,7 +63,8 @@ class Header extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    sidebar: state.sidebar
+    sidebar: state.sidebar,
+    user: state.user,
   }
 };
 
@@ -69,6 +73,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       dockTriggered: dockTriggered,
       getAllMajors: getAllMajors,
+      logout: logout,
     },
     dispatch);
 };
