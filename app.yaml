@@ -1,3 +1,7 @@
 # [START app_yaml]
 runtime: nodejs
 env: flex
+network:
+  forwarded_ports:
+    - 8080
+    - 3000
