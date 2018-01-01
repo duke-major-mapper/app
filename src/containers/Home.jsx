@@ -29,6 +29,13 @@ class Home extends Component {
     this.props.getAllClasses();
   }
 
+  componentWillReceiveProps(newProps) {
+    const { history, user } = newProps;
+    if (!user.isLoggedIn) {
+      history.push('/login');
+    }
+  }
+
   render(){
     const { sidebar, user, data, majors } = this.props
 

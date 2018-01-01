@@ -1,4 +1,4 @@
-const isAuth = (store, history, component, loginComponent) => {
+const isAuth = ({ store, history, component, loginComponent }) => {
   const state = store.getState('user');
   const user = state.user;
   if (user.netID === '') {
