@@ -133,6 +133,12 @@ function data(state = initialState, action) {
         error: false,
       }
     }
+    case 'BEGIN_LOGIN': {
+      return initialState;
+    }
+    case 'END_LOGOUT': {
+      return initialState;
+    }
     default: {
       return state;
     }
