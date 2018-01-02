@@ -34,8 +34,6 @@ import './../styles/index.css';
 injectTapEventPlugin();
 
 const { store, persistor } = configureStore();
-console.log('store: ', store);
-// debugger;
 
 class App extends Component {
   render() {
@@ -54,7 +52,6 @@ class App extends Component {
                       <Route path='/' exact component={Login} />
                     </ConnectedSwitch>
                   </div>
-
                 </MuiThemeProvider>
               </ConnectedRouter>
             </div>

@@ -39,7 +39,6 @@ class Header extends Component {
         <AppBar
           title={logo}
           onLeftIconButtonTouchTap={this.onMenuClick.bind(this)}
-          secondary={true}
           iconElementRight={!showMenu ? null :
             <IconMenu
               iconButtonElement={<IconButton iconClassName="material-icons">more_vert</IconButton>}

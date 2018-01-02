@@ -22,7 +22,6 @@ const reducer = {
   ...allReducers,
   router: routerReducer,
 }
-console.log('reducer: ', reducer);
 
 const reducers = persistCombineReducers(config, reducer);
 
