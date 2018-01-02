@@ -20,6 +20,9 @@ import ConnectedSwitch from './../components/utils/switch';
 import SignUp from './../components/SignUp';
 import { Login } from './../components';
 
+// redux-persist
+import { PersistGate } from 'redux-persist/es/integration/react';
+import { configureStore, DevTools, history } from './utils/store';
 
 import * as allReducers from "./../reducers";
 
@@ -28,52 +31,36 @@ import logo from './../images/react_logo.svg';
 import theme from '../global/material-ui-theme';
 import './../styles/index.css';
 
-const reducers = combineReducers({
-  ...allReducers,
-  router: routerReducer,
-});
-
-const history = createHistory();
-const middleware = routerMiddleware(history);
-
 injectTapEventPlugin();
 
-const DevTools = createDevTools(
-  <DockMonitor
-    toggleVisibilityKey="ctrl-b"
-    changePositionKey="ctrl-q"
-    defaultIsVisible={false}
-  >
-    <LogMonitor theme="tomorrow" />
-  </DockMonitor>,
-);
-
-const enhancer = compose(
-  applyMiddleware(middleware, thunkMiddleware),
-  DevTools.instrument(),
-);
-
-const store = createStore(reducers, enhancer);
+const { store, persistor } = configureStore();
+console.log('store: ', store);
+// debugger;
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div>
+        <PersistGate persistor={persistor} >
           <div>
-            <ConnectedRouter history={history}>
-              <MuiThemeProvider muiTheme={theme}>
-                <Header history={history}/>
-                <ConnectedSwitch>
-                  <Route path='/login' exact component={Login} />
-                  <Route path='/home' exact component={Home} />
-                  <Route path='/' exact component={Login} />
-                </ConnectedSwitch>
-              </MuiThemeProvider>
-            </ConnectedRouter>
+            <div>
+              <ConnectedRouter history={history}>
+                <MuiThemeProvider muiTheme={theme}>
+                  <div>
+                    <Header history={history}/>
+                    <ConnectedSwitch>
+                      <Route path='/login' exact component={Login} />
+                      <Route path='/home' exact component={Home} />
+                      <Route path='/' exact component={Login} />
+                    </ConnectedSwitch>
+                  </div>
+
+                </MuiThemeProvider>
+              </ConnectedRouter>
+            </div>
+            <DevTools />
           </div>
-          <DevTools />
-        </div>
+        </PersistGate>
       </Provider>
     );
   }
