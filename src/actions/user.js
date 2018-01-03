@@ -53,8 +53,8 @@ const updateMyClasses = (classIDs) => (
       end: 'END_PUT_MY_CLASSES',
     },
     method: 'PUT',
-    data: takenClasses,
-    url: '/major_classes',
+    data: classIDs,
+    url: '/my_classes',
   })
 )
 
@@ -95,6 +95,7 @@ export {
   login,
   logout,
   myClasses,
+  updateMyClasses,
   changeTakenClasses,
   signUpComplete
 };

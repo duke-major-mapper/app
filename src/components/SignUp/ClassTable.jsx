@@ -15,7 +15,7 @@ import IconButton from 'material-ui/IconButton';
 import Pagination from 'material-ui-pagination';
 
 import { getAllClasses } from './../../actions/data';
-import { changeTakenClasses } from './../../actions/user';
+import { changeTakenClasses, updateMyClasses } from './../../actions/user';
 
 class ClassTable extends Component {
   constructor(props) {
@@ -38,23 +38,25 @@ class ClassTable extends Component {
     const endIndex = startIndex + 9;
     // Creating arrays for selected and deselected classes of each page
     rows.forEach((val) => {
-      selected.push(searchedData[val + startIndex]);
+      selected.push(searchedData[val + startIndex].id);
     });
     for (let i = startIndex; i < endIndex; i++) {
-      if (selected.indexOf(searchedData[i]) === -1) {
-        deselected.push(searchedData[i]);
+      if (selected.indexOf(searchedData[i].id) === -1) {
+        deselected.push(searchedData[i].id);
       }
     }
     // Will change selectedClasses state value depending on selected and deselected
+    const selectedClassesIDs = selectedClasses.map((val) => (val.id));
     for (let i = 0; i < selected.length; i++) {
-      if (selectedClasses.indexOf(selected[i]) === -1) {
-        selectedClasses.push(selected[i]);
+      if (selectedClassesIDs.indexOf(selected[i]) === -1) {
+        const selectedClass = searchedData.find((val) => (val.id === selected[i]));
+        selectedClasses.push(selectedClass);
         this.setState({ selectedClasses });
         changeTakenClasses(selectedClasses);
       }
     }
     for (let i = 0; i < deselected.length; i++) {
-      const index = selectedClasses.indexOf(deselected[i]);
+      const index = selectedClassesIDs.indexOf(deselected[i]);
       if (index !== -1) {
         selectedClasses.splice(index, 1);
         this.setState({ selectedClasses });
@@ -171,7 +173,9 @@ class ClassTable extends Component {
   }
 
   handleUpdate = () => {
-    console.log('update');
+    const { updateMyClasses, user } = this.props;
+    const classesIDs = user.takenClasses.map((val) => (val.id));
+    updateMyClasses(classesIDs);
   }
 
   render () {
@@ -207,6 +211,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getAllClasses: getAllClasses,
       changeTakenClasses: changeTakenClasses,
+      updateMyClasses: updateMyClasses,
     },
     dispatch);
 };
