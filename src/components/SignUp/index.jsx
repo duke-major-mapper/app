@@ -73,7 +73,6 @@ class SignUp extends Component {
             return val.id;
           }),
         });
-        history.push('/home');
       }
       this.setState({
         stepIndex: stepIndex + 1,
