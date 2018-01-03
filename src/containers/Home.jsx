@@ -76,7 +76,20 @@ class Home extends Component {
                   : null
                 }
                 <Tab label="My Classes">
-                  <MyClasses />
+                  <Card
+                    style={cardStyles}
+                  >
+                    <CardHeader
+                          title="Classes"
+                          actAsExpander={true}
+                          showExpandableButton={true}
+                    />
+                    <CardMedia
+                      expandable={true}
+                    >
+                      <MyClasses />
+                    </CardMedia>
+                  </Card>
                   <Card
                     style={cardStyles}
                   >
