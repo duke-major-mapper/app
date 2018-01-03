@@ -66,6 +66,28 @@ export default (state=initialState, action)=> {
         success: true,
       }
     }
+    case 'BEGIN_PUT_MY_CLASSES': {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        errorMessage: null,
+      };
+    }
+    case 'FAILED_PUT_MY_CLASSES': {
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+        errorMessage: action.payload.message,
+      }
+    }
+    case 'END_PUT_MY_CLASSES': {
+      return {
+        ...state,
+        isLoading: false,
+      }
+    }
     case 'CHANGE_USERDATA': {
       return {
         ...state,

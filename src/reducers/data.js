@@ -69,6 +69,7 @@ function data(state = initialState, action) {
     case 'FAILED_GET_CLASSES': {
         return {
         ...state,
+        isLoading: false,
         error: true,
         errorMessage: action.payload.message,
       }

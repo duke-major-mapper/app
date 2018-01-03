@@ -16,27 +16,45 @@ app.put('/my_classes', function (req, res) {
         return;
     }
 
-    var success = true
+    var success = true;
+    var message = '';
+
+    connection.query(`DELETE FROM UserClasses WHERE uid LIKE '${net_id}';`, function (error, result) {
+      if (error) {
+        success = false;
+        message = 'Error with DELETE FROM query';
+        return;
+      }
+    })
 
     classes.forEach(cl => {
+      if (success) {
         connection.query(
             `INSERT INTO UserClasses
             VALUES ('${net_id}', ${cl});`, function (error, result) {
               if (error) {
                     success = false;
+                    message = 'ERROR with INSERT INTO query';
               }
             }
         );
+      }
     });
 
+    var requestObject = template;
+
     if (success) {
-        res.status(200).send({
-            'success': true
-        });
+      requestObject.success = success;
+      requestObject.message = 'Succuessful Request';
+      requestObject.status = 200;
+      res.status(200).send(template);
+      console.log('PUT ' + req.originalUrl);
     } else {
-        res.status(500).send({
-            'success': false
-        });
+      requestObject.success = success;
+      requestObject.message = message;
+      requestObject.status = 500;
+      res.status(500).send(template);
+      console.log('FAILED: PUT ' + req.originalUrl);
     }
 });
 
@@ -49,20 +67,21 @@ app.get('/my_classes', function (req, res) {
     }
 
     connection.query(
-        `SELECT uid, id, class_code, name
+        `SELECT id, class_code, name
         FROM UserClasses, Class
         WHERE Class.id=UserClasses.class_id
         AND UserClasses.uid='${net_id}';`, function (error, result) {
+          var requestObject = template;
           if (error) {
-            template.status = 500;
-            template.success = false;
-            template.message = (error.sqlMessage ? error.sqlMessage : error);
+            requestObject.status = 500;
+            requestObject.success = false;
+            requestObject.message = (error.sqlMessage ? error.sqlMessage : error);
             res.status(500).send(template);
           } else {
-            template.status = 200;
-            template.data = result;
-            template.message = 'Classes recieved';
-            template.id = net_id;
+            requestObject.status = 200;
+            requestObject.data = result;
+            requestObject.message = 'Classes recieved';
+            requestObject.id = net_id;
             res.status(200).send(template);
           }
         }

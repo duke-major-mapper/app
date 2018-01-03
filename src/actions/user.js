@@ -45,6 +45,22 @@ const myClasses = (netID) => (
   })
 )
 
+const updateMyClasses = (netID, classIDs) => (
+  crud({
+    dispatch: {
+      begin: 'BEGIN_PUT_MY_CLASSES',
+      fail: 'FAILED_PUT_MY_CLASSES',
+      end: 'END_PUT_MY_CLASSES',
+    },
+    method: 'PUT',
+    data: {
+      classes: classIDs,
+      net_id: netID,
+    },
+    url: '/my_classes',
+  })
+)
+
 const changeTakenClasses = (takenClasses) => {
   return {
     type: 'CHANGE_USERDATA',
@@ -83,6 +99,7 @@ export {
   login,
   logout,
   myClasses,
+  updateMyClasses,
   changeTakenClasses,
   signUpComplete
 };

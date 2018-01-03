@@ -10,11 +10,12 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import Pagination from 'material-ui-pagination';
 
 import { getAllClasses } from './../../actions/data';
-import { changeTakenClasses } from './../../actions/user';
+import { changeTakenClasses, updateMyClasses } from './../../actions/user';
 
 class ClassTable extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class ClassTable extends Component {
     this.state = {
       page: 1,
       total: Math.ceil(AllClasses.length/10),
-      selectedClasses: [],
+      selectedClasses: props.selectedClasses ? props.selectedClasses : [],
       searchedData: AllClasses,
     };
   }
@@ -37,23 +38,25 @@ class ClassTable extends Component {
     const endIndex = startIndex + 9;
     // Creating arrays for selected and deselected classes of each page
     rows.forEach((val) => {
-      selected.push(searchedData[val + startIndex]);
+      selected.push(searchedData[val + startIndex].id);
     });
     for (let i = startIndex; i < endIndex; i++) {
-      if (selected.indexOf(searchedData[i]) === -1) {
-        deselected.push(searchedData[i]);
+      if (selected.indexOf(searchedData[i].id) === -1) {
+        deselected.push(searchedData[i].id);
       }
     }
     // Will change selectedClasses state value depending on selected and deselected
+    const selectedClassesIDs = selectedClasses.map((val) => (val.id));
     for (let i = 0; i < selected.length; i++) {
-      if (selectedClasses.indexOf(selected[i]) === -1) {
-        selectedClasses.push(selected[i]);
+      if (selectedClassesIDs.indexOf(selected[i]) === -1) {
+        const selectedClass = searchedData.find((val) => (val.id === selected[i]));
+        selectedClasses.push(selectedClass);
         this.setState({ selectedClasses });
         changeTakenClasses(selectedClasses);
       }
     }
     for (let i = 0; i < deselected.length; i++) {
-      const index = selectedClasses.indexOf(deselected[i]);
+      const index = selectedClassesIDs.indexOf(deselected[i]);
       if (index !== -1) {
         selectedClasses.splice(index, 1);
         this.setState({ selectedClasses });
@@ -142,13 +145,14 @@ class ClassTable extends Component {
   getRows = () => {
     const { AllClasses } = this.props;
     const { page, selectedClasses, searchedData } = this.state;
+    const selectedClassesIDs = selectedClasses.map((val) => (val.id));
     const startIndex = ( page - 1) * 10;
     const endIndex = startIndex + 9;
     return searchedData.slice(startIndex, endIndex).map((value, index) => {
       return (
         <TableRow
           key={index}
-          selected={selectedClasses.indexOf(searchedData[index + startIndex]) !== -1}
+          selected={selectedClassesIDs.indexOf(searchedData[index + startIndex].id) !== -1}
         >
           <TableRowColumn>{value.name}</TableRowColumn>
           <TableRowColumn>{value.class_code}</TableRowColumn>
@@ -157,11 +161,28 @@ class ClassTable extends Component {
     })
   }
 
+  renderUpdateButton = () => {
+    return (
+      <RaisedButton
+        label="Update"
+        backgroundColor="#1bb313"
+        labelColor="#ffffff"
+        onClick={this.handleUpdate}
+      />
+    );
+  }
+
+  handleUpdate = () => {
+    const { updateMyClasses, user } = this.props;
+    const classesIDs = user.takenClasses.map((val) => (val.id));
+    updateMyClasses(user.netID, classesIDs);
+  }
+
   render () {
-    const { AllClasses } = this.props;
+    const { AllClasses, update } = this.props;
     return (
       <div>
-        {this.renderSearchBar()}
+        { this.renderSearchBar() }
         { this.renderTable() }
         <div style={{ padding: '12px' }} >
           <Pagination
@@ -171,6 +192,7 @@ class ClassTable extends Component {
             onChange={this.handlePaginationChange.bind(this)}
           />
         </div>
+        { update && this.renderUpdateButton() }
       </div>
     );
   }
@@ -189,6 +211,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       getAllClasses: getAllClasses,
       changeTakenClasses: changeTakenClasses,
+      updateMyClasses: updateMyClasses,
     },
     dispatch);
 };
