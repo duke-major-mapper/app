@@ -23,7 +23,7 @@ class ClassTable extends Component {
     this.state = {
       page: 1,
       total: Math.ceil(AllClasses.length/10),
-      selectedClasses: [],
+      selectedClasses: props.selectedClasses ? props.selectedClasses : [],
       searchedData: AllClasses,
     };
   }
@@ -142,13 +142,14 @@ class ClassTable extends Component {
   getRows = () => {
     const { AllClasses } = this.props;
     const { page, selectedClasses, searchedData } = this.state;
+    const selectedClassesIDs = selectedClasses.map((val) => (val.id));
     const startIndex = ( page - 1) * 10;
     const endIndex = startIndex + 9;
     return searchedData.slice(startIndex, endIndex).map((value, index) => {
       return (
         <TableRow
           key={index}
-          selected={selectedClasses.indexOf(searchedData[index + startIndex]) !== -1}
+          selected={selectedClassesIDs.indexOf(searchedData[index + startIndex].id) !== -1}
         >
           <TableRowColumn>{value.name}</TableRowColumn>
           <TableRowColumn>{value.class_code}</TableRowColumn>
@@ -158,6 +159,7 @@ class ClassTable extends Component {
   }
 
   render () {
+    console.log('selectedClasses', this.props.selectedClasses);
     const { AllClasses } = this.props;
     return (
       <div>
