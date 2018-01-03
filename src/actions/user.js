@@ -45,7 +45,7 @@ const myClasses = (netID) => (
   })
 )
 
-const updateMyClasses = (classIDs) => (
+const updateMyClasses = (netID, classIDs) => (
   crud({
     dispatch: {
       begin: 'BEGIN_PUT_MY_CLASSES',
@@ -53,7 +53,10 @@ const updateMyClasses = (classIDs) => (
       end: 'END_PUT_MY_CLASSES',
     },
     method: 'PUT',
-    data: classIDs,
+    data: {
+      classes: classIDs,
+      net_id: netID,
+    },
     url: '/my_classes',
   })
 )

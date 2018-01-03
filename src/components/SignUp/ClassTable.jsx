@@ -175,7 +175,7 @@ class ClassTable extends Component {
   handleUpdate = () => {
     const { updateMyClasses, user } = this.props;
     const classesIDs = user.takenClasses.map((val) => (val.id));
-    updateMyClasses(classesIDs);
+    updateMyClasses(user.netID, classesIDs);
   }
 
   render () {
