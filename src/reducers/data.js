@@ -69,6 +69,7 @@ function data(state = initialState, action) {
     case 'FAILED_GET_CLASSES': {
         return {
         ...state,
+        isLoading: false,
         error: true,
         errorMessage: action.payload.message,
       }
@@ -82,6 +83,28 @@ function data(state = initialState, action) {
         classes: temp_classes,
         isLoading: false,
         error: false,
+      }
+    }
+    case 'BEGIN_PUT_CLASSES': {
+      return {
+        ...state,
+        isLoading: true,
+        error: false,
+        errorMessage: null,
+      };
+    }
+    case 'FAILED_PUT_CLASSES': {
+      return {
+        ...state,
+        isLoading: false,
+        error: true,
+        errorMessage: action.payload.message,
+      }
+    }
+    case 'END_PUT_CLASSES': {
+      return {
+        ...state,
+        isLoading: false,
       }
     }
     case 'BEGIN_GET_OVERLAP': {

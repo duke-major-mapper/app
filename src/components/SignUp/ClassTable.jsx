@@ -165,8 +165,13 @@ class ClassTable extends Component {
         label="Update"
         backgroundColor="#1bb313"
         labelColor="#ffffff"
+        onClick={this.handleUpdate}
       />
     );
+  }
+
+  handleUpdate = () => {
+    console.log('update');
   }
 
   render () {
