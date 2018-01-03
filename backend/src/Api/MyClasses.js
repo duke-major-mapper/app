@@ -49,7 +49,7 @@ app.get('/my_classes', function (req, res) {
     }
 
     connection.query(
-        `SELECT uid, id, class_code, name
+        `SELECT id, class_code, name
         FROM UserClasses, Class
         WHERE Class.id=UserClasses.class_id
         AND UserClasses.uid='${net_id}';`, function (error, result) {
