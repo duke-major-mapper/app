@@ -91,6 +91,7 @@ class Home extends Component {
                       <div className="edit-classes">
                         <ClassTable
                           selectedClasses={user.takenClasses}
+                          update
                         />
                       </div>
                     </CardMedia>

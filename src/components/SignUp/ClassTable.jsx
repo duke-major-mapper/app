@@ -10,6 +10,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import Pagination from 'material-ui-pagination';
 
@@ -158,12 +159,21 @@ class ClassTable extends Component {
     })
   }
 
+  renderUpdateButton = () => {
+    return (
+      <RaisedButton
+        label="Update"
+        backgroundColor="#1bb313"
+        labelColor="#ffffff"
+      />
+    );
+  }
+
   render () {
-    console.log('selectedClasses', this.props.selectedClasses);
-    const { AllClasses } = this.props;
+    const { AllClasses, update } = this.props;
     return (
       <div>
-        {this.renderSearchBar()}
+        { this.renderSearchBar() }
         { this.renderTable() }
         <div style={{ padding: '12px' }} >
           <Pagination
@@ -173,6 +183,7 @@ class ClassTable extends Component {
             onChange={this.handlePaginationChange.bind(this)}
           />
         </div>
+        { update && this.renderUpdateButton() }
       </div>
     );
   }
