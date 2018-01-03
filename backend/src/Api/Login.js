@@ -16,7 +16,7 @@ app.put('/login', function (req, res) {
         res.status(400).send("Please provide a password parameter");
         return;
     }
-    //TODO: Fix objects below
+    
     connection.query(
         `SELECT * FROM User WHERE id LIKE '%${id}%'`, function (error, result) {
             if (error) {

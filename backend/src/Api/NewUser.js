@@ -27,7 +27,7 @@ app.put('/new_user', function (req, res) {
         console.log('FAILED: GET ' + req.originalUrl);
         return;
     }
-    // TODO: Fix objects below
+    
     var success = true;
     connection.query(
         `INSERT INTO User
