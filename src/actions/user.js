@@ -61,6 +61,7 @@ const signUpComplete = (userInfo) => (
     },
     method: 'PUT',
     url: '/new_user',
+    push: '/home',
     data: userInfo,
   })
 )
