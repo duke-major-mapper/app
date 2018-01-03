@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import {Card, CardMedia, CardHeader} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import MajorTable from './MajorTable';
+import MajorTable from './../Tables/MajorTable';
 
 import { getOverlap } from './../../actions/data';
 import { overlapTriggered } from './../../actions/sidebar-action';

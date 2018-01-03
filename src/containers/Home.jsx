@@ -6,12 +6,13 @@ import CircularProgress from 'material-ui/CircularProgress';
 import {Card, CardMedia, CardHeader} from 'material-ui/Card';
 
 import Welcome from './../components/Page/Welcome';
-import MajorTable from './../components/Page/MajorTable';
 import MyClasses from './../components/Page/MyClasses';
-import ReqsTable from './../components/Page/ReqsTable';
 import Overlap from './../components/Page/Overlap';
-import ClassTable from './../components/SignUp/ClassTable';
 import {Tabs, Tab} from 'material-ui/Tabs';
+
+import MajorTable from './../components/Tables/MajorTable';
+import ClassTable from './../components/Tables/ClassTable';
+import ReqsTable from './../components/Tables/ReqsTable';
 
 import { getAllMajors, getClasses, getReqs, getAllClasses } from './../actions/data';
 

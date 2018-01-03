@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ClassTable from './ClassTable';
+import ClassTable from './../Tables/ClassTable';
 
 class SecondPage extends Component {
   render() {
