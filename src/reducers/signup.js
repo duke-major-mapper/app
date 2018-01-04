@@ -38,6 +38,12 @@ export default (state = initialState, action) => {
         errorMessage: action.payload,
       }
     }
+    case 'BEGIN_LOGIN': {
+      return initialState;
+    }
+    case 'END_LOGOUT': {
+      return initialState;
+    }
   }
   return state;
 }
